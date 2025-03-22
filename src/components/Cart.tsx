@@ -10,10 +10,7 @@ interface CartProps {
 
 export const Cart: React.FC<CartProps> = ({ isOpen, toggleCart, cartItems, setCartItems }) => {
   
-  const getInitialCart = () => {
-    const cart = localStorage.getItem("cartItems");
-    return cart ? JSON.parse(cart) : [];
-  };
+
 
   const clearCart = () => {
     localStorage.removeItem('cartItems');

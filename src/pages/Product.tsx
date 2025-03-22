@@ -26,7 +26,7 @@ interface Product {
 }
 
 export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_cart }) => {
-  const [new_qty, setNew_qty] = useState(1);
+  
   const [productData, setProductData] = useState<Product | null>(null);
   const [loading, setLoading] = useState(false);
   const [featured, setFeatured] = useState<Product[]>([]);
@@ -75,6 +75,7 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
         console.log(e);
       } finally {
         setLoading(false);
+       
       }
     };
 
@@ -101,7 +102,7 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
         price,
         color,
         size,
-        quantity: new_qty,
+        
         image: main_image,
       };
       addToCart(productToAdd);
@@ -161,7 +162,7 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
             </div>
             <div className="my-8 flex flex-row border-2 border-black w-fit">
               <div className="px-5 py-2 border-r-2 text-lg">-</div>
-              <div className="px-10 py-2 border-r-2 text-lg">{new_qty}</div>
+              <div className="px-10 py-2 border-r-2 text-lg">{}</div>
               <div className="px-5 py-2 text-lg">+</div>
             </div>
             <div className="flex md:flex-row md:w-[100%] justify-between gap-4 flex-col my-9">

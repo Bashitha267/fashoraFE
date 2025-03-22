@@ -4,15 +4,13 @@ import { ShopSection } from "../components/ShopSection";
 import '../components/home.css';
 
 // Define the type for props
-interface HomeProps {
-  navigate_page: (page: string) => void;
-}
 
-export const Home = ({ navigate_page }: HomeProps) => {
+
+export const Home = () => {
   return (
     <div className="w-screen md:max-w[170vh] mx-auto">
       <HomeSection />
-      <Arrivals navigateTo={navigate_page} />
+      <Arrivals  />
       {/* <Bookinghome/> */}
       <ShopSection />
     </div>
