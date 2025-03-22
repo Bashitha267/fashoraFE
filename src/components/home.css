@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@300;400&family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+
+.title_heading{
+  font-family: 'Playfair Display', serif;
+  color: #333333;
+  text-transform: uppercase;
+}
+body{
+  background-color: #fffdf9;
+}
+
+
+.title_paragraph{
+  font-family: 'Lora', serif;
+  
+}
+
+.item_name{
+  font-family: 'Playfair';
+
+
+}
+.item_desc{
+font-family: 'Poppins';
+
+}
+.item_prize{
+font-family: 'Montserrat';
+
+}
+/* Change arrow color, size, and position */
+.slick-prev,
+.slick-next {
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+}
+
+/* Custom left arrow */
+.slick-prev {
+  left: -50px; /* Move left */
+}
+.slick-prev:before {
+  color: orange !important; /* Change arrow color */
+  font-size: 30px !important; /* Increase size */
+}
+
+/* Custom right arrow */
+.slick-next {
+  right: -50px; /* Move right */
+}
+.slick-next:before {
+  color: orange !important;
+  font-size: 30px !important;
+}
+.section_name{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 35px;
+}
