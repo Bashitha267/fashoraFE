@@ -1,10 +1,19 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import { ThreeDot } from "react-loading-indicators"
-
-export const Men = ({display_cart}) => {
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { ThreeDot } from "react-loading-indicators";
+interface KidsProps {
+  display_cart: any; // You can specify the actual type of display_cart if possible
+}
+interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  main_image:any;
+  // other properties
+}
+export const Men:React.FC<KidsProps>= ({display_cart}) => {
   // 
-  const [productData,setproductData]=useState([])
+  const [productData,setproductData]=useState<Product[]>([])
   const [loading,setloading]=useState(false)
   const [loadingcolors,setloadingcolors]=useState(false)
 

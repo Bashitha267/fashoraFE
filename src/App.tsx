@@ -12,7 +12,7 @@ import { Signup } from './pages/Signup'
 import { Women } from './pages/Women'
 
 function App() {
-  const [count, setCount] = useState(0)
+
   const [cartopen,setCartopen] = useState(false)
   const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [])
   const [productId,setproductID]=useState('')
