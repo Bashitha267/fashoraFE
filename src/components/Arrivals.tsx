@@ -2,7 +2,7 @@ import { Heart, ShoppingCart } from "lucide-react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-export const Arrivals = ({navigateTo}) => {
+export const Arrivals = ({ navigateTo }: { navigateTo: (page: string) => void }) => {
   const arrivaldata = [
     {
       id: 1,
