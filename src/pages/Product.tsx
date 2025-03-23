@@ -1,10 +1,16 @@
 import axios from "axios";
+import useEmblaCarousel from "embla-carousel-react";
 import { Heart, ShoppingCartIcon, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { ThreeDot } from "react-loading-indicators";
-import { Swiper, SwiperSlide } from "swiper/react";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
+// import Swiper styles
+
+
+
+
 
 interface KidsProps {
   display_cart: (id: string) => void; // Use a specific type for display_cart
@@ -32,7 +38,7 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
   const [featured, setFeatured] = useState<Product[]>([]);
   const [category, setCategory] = useState<string>("");
   const [added, setAdded] = useState("ADD TO CART");
-
+  const [emblaRef] = useEmblaCarousel({ loop: true });
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
@@ -199,42 +205,24 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
 
       <div className="flex flex-col w-screen mt-30 max-w-[80%] md:mx-auto border-t-2 border-gray-500 pt-10 mb-20 p-4 ml-9">
         <div className="md:text-5xl pt-5 pb-10 item_name flex text-3xl justify-center">Featured Products</div>
-        <div>
-          <Swiper
-            spaceBetween={20}
-            grabCursor={true}
-            grid={{
-              rows: 2, // Set the number of rows
-            }}
-            breakpoints={{
-              140: {
-                slidesPerView: 2,
-                spaceBetween: 10,
-                grid: {
-                  rows: 2, // 2 rows of items
-                },
-              },
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 15,
-                grid: {
-                  rows: 2, // 2 rows of items on mobile
-                },
-              },
-              1024: {
-                slidesPerView: 5,
-                spaceBetween: 20,
-              },
-            }}
-          >
-            {featured.map((product) => (
-              <SwiperSlide key={product._id} onClick={() => display_cart(product._id)}>
-                <img src={product.main_image} alt={product.name} className="object-cover w-[30vh] h-[30vh]" />
-                <p className="text-center mt-2 item_name text-lg item_name">{product.name}</p>
-                <p className="text-center mt-2 item_name text-2xl font-bold item_prize">$ {product.price}</p>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+        <div className="overflow-x-scroll  flex  w-[120vh]">
+        
+        <div className="overflow-hidden" ref={emblaRef}>
+      <div className="flex space-x-4">
+        {featured.map((product) => (
+          <div key={product._id} onClick={() => display_cart(product._id)} className="min-w-[30vh]">
+            <img
+              src={product.main_image}
+              alt={product.name}
+              className="object-cover w-[30vh] h-[30vh] rounded-lg"
+            />
+            <p className="text-center mt-2 text-lg">{product.name}</p>
+            <p className="text-center mt-2 text-2xl font-bold">$ {product.price}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+        
         </div>
       </div>
     </div>
