@@ -32,7 +32,7 @@ export const NavBar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Icons and Mobile Menu Button */}
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse mx-2">
+        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse md:gap-4 gap-1">
           <a
             onClick={(e) => {
               e.preventDefault();
