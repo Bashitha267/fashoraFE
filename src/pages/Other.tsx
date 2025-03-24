@@ -54,10 +54,10 @@ useEffect(()=>{
   fetchProduct()
 },[])
 if(loading||loadingcolors){
-  return <div className="mt-45 w-screen md:max-w-[160vh] mx-auto max-w-[80%] flex justify-center items-center h-[80vh]"><ThreeDot variant="pulsate" color="#FF6900" size="large" text="" textColor=""  speedPlus={0} /></div>
+  return <div className="mt-20 w-screen md:max-w-[160vh] mx-auto max-w-[80%] flex justify-center items-center h-[80vh]"><ThreeDot variant="pulsate" color="#FF6900" size="large" text="" textColor=""  speedPlus={0} /></div>
 }
   return (
-    <div className="mt-45 w-screen md:max-w-[160vh] mx-auto max-w-[80%]">
+    <div className="mt-20 w-screen md:max-w-[160vh] mx-auto max-w-[80%]">
         <div className=" w-screen max-w-[100%] md:max-w-[160vh] md:mx-auto  flex flex-row border-2 border-[#6F6F6F] gap-2">
         <div className="p-6 md:w-[40vh]">
           <div className="flex-col flex gap-5">

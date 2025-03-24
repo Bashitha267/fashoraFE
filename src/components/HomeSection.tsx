@@ -1,7 +1,7 @@
 import background1 from "../assets/men.jpg"
 export const HomeSection = () => {
   return (
-    <div className="mt-30 flex flex-col gap-3 items-center md:justify-center md:p-16 pt-4 pb-4  ">
+    <div className="mt-10 flex flex-col gap-3 items-center md:justify-center md:p-16 pt-4 pb-4  ">
      <div><img src={background1} className="w-[160vh] h-[60vh] object-contain"></img></div>
 
     <div className=" md:py-10 flex justify-center">

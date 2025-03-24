@@ -118,7 +118,7 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
 
   if (loading) {
     return (
-      <div className="mt-45 w-screen md:max-w-[160vh] mx-auto max-w-[80%] flex justify-center items-center h-[80vh]">
+      <div className="mt-20 w-screen md:max-w-[160vh] mx-auto max-w-[80%] flex justify-center items-center h-[80vh]">
         <ThreeDot variant="pulsate" color="#FF6900" size="large" text="" textColor="" speedPlus={0} />
       </div>
     );
