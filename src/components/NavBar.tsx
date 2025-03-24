@@ -20,7 +20,7 @@ export const NavBar: React.FC<NavbarProps> = ({
 
   return (
     <nav className="bg-white fixed w-full z-500 top-0 start-0 border-b border-gray-200">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="md:max-w-[160vh] w-screen flex flex-wrap items-center justify-between mx-auto p-4">
         {/* Logo */}
         <div
           className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer justify-center"
@@ -99,7 +99,7 @@ export const NavBar: React.FC<NavbarProps> = ({
                     e.preventDefault();
                     navigateTo(page);
                   }}
-                  className={`block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-orange-500 md:p-0 ${
+                  className={`block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-orange-500 md:p-0 text-2xl ${
                     currentPage === page
                     ? "text-orange-500 border-b-2 border-orange-500"
                     : "text-gray-900 hover:text-orange-500"
