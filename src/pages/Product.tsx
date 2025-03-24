@@ -210,9 +210,9 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
 
       <div className="flex flex-col w-screen mt-30 max-w-[80%] md:mx-auto border-t-2 border-gray-500 pt-10 mb-20 p-4 ml-9">
         <div className="md:text-5xl pt-5 pb-10 item_name flex text-3xl justify-center">Featured Products</div>
-        {/* <div className="overflow-x-scroll  flex  w-[120vh]">
+        <div className="">
         
-        <div className="overflow-hidden" ref={emblaRef}>
+        <div className="overflow-hidden max-w-[150vh]" ref={emblaRef}>
       <div className="flex space-x-4">
         {featured.map((product) => (
           <div key={product._id} onClick={() => display_cart(product._id)} className="min-w-[30vh]">
@@ -228,7 +228,7 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
       </div>
     </div>
         
-        </div> */}
+        </div>
       </div>
     </div>
   );
