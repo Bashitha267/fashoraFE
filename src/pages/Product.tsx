@@ -1,6 +1,6 @@
 import axios from "axios";
 import useEmblaCarousel from "embla-carousel-react";
-import { Heart, ShoppingCartIcon, Star } from "lucide-react";
+import { ArrowBigLeft, Heart, ShoppingCartIcon, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -100,6 +100,9 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
       : [];
 
   const handleAddToCart = () => {
+    if(added=="ITEM ADDED"){
+        return;
+    }
     if (productData) {
       const { _id, name, price, color, size, main_image } = productData;
       const productToAdd = {
@@ -125,12 +128,14 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
   }
 
   return (
-    <div className="p-4 md:mt-40 flex flex-col w-screen mt-30 max-w-[80%] md:mx-auto">
+    <div className="md:mt-20 flex flex-col w-screen mt-20 max-w-[80%] mx-auto">
+      <div className="flex gap-2 text-xl w-fit mb-3"><ArrowBigLeft size={28} color={"Red"}/>Go Back</div>
       <div className="flex md:p-3 md:mx-auto md:max-w-[150vh]">
-        <div className="md:w-screen w-screen md:flex md:flex-row md:gap-9 md:justify-evenly">
+        <div className="md:w-screen w-screen md:flex md:flex-row md:gap-9 md:justify-evenly ">
+          
           <div className="flex flex-col">
             {galleryImages.length > 0 ? (
-              <div className="md:max-w-[100vh] md:p-0">
+              <div className="md:max-w-[100vh] ">
                 <ImageGallery
                   items={galleryImages}
                   showPlayButton={false}
@@ -139,7 +144,7 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
                   slideInterval={3000}
                   renderItem={({ original }) => (
                     <div className="flex justify-center">
-                      <img src={original} alt="Gallery Image" className="object-cover" />
+                      <img src={original} alt="Gallery Image" className="object-cover h-[60vh]" />
                     </div>
                   )}
                 />
@@ -205,7 +210,7 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
 
       <div className="flex flex-col w-screen mt-30 max-w-[80%] md:mx-auto border-t-2 border-gray-500 pt-10 mb-20 p-4 ml-9">
         <div className="md:text-5xl pt-5 pb-10 item_name flex text-3xl justify-center">Featured Products</div>
-        <div className="overflow-x-scroll  flex  w-[120vh]">
+        {/* <div className="overflow-x-scroll  flex  w-[120vh]">
         
         <div className="overflow-hidden" ref={emblaRef}>
       <div className="flex space-x-4">
@@ -223,7 +228,7 @@ export const Product: React.FC<KidsProps> = ({ addToCart, productID, display_car
       </div>
     </div>
         
-        </div>
+        </div> */}
       </div>
     </div>
   );
