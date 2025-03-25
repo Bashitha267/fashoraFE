@@ -65,13 +65,13 @@ function App() {
     switch (currentPage) {
       case 'home':
         return <Home  />;
-      case 'women':
+      case 'Women':
         return <Women display_cart={display_cart} />;
-      case 'men':
+      case 'Men':
         return <Men display_cart={display_cart} />;
       case 'product':
-        return <Product addToCart={addToCart} productID={productId} display_cart={display_cart} />;
-      case 'kids':
+        return <Product addToCart={addToCart} productID={productId} display_cart={display_cart} navigateTo={navigateTo} />;
+      case 'Kids':
         return <Kids display_cart={display_cart} />;
       case 'Footwear':
         return <Other display_cart={display_cart} />;

@@ -12,6 +12,7 @@ interface KidsProps {
   display_cart: (id: string) => void; // Use a specific type for display_cart
   productID: string; // Assuming productID is a string
   addToCart: (product: any) => void; // Define this type based on your product structure
+  navigateTo:(category:string)=>void;
 }
 
 interface Product {
@@ -31,13 +32,14 @@ export const Product: React.FC<KidsProps> = ({
   addToCart,
   productID,
   display_cart,
+  navigateTo
 }) => {
   const [productData, setProductData] = useState<Product | null>(null);
   const [loading, setLoading] = useState(false);
   const [featured, setFeatured] = useState<Product[]>([]);
   const [category, setCategory] = useState<string>("");
   const [added, setAdded] = useState("ADD TO CART");
-  const [emblaRef] = useEmblaCarousel({ loop: true });
+  const [emblaRef] = useEmblaCarousel({ loop: false });
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
@@ -48,6 +50,8 @@ export const Product: React.FC<KidsProps> = ({
         if (response.data) {
           setProductData(response.data);
           setCategory(response.data.category);
+         
+          setAdded("ADD TO CART")
         } else {
           console.log("No product found.");
         }
@@ -73,6 +77,7 @@ export const Product: React.FC<KidsProps> = ({
         );
         if (response.data) {
           setFeatured(response.data);
+
         } else {
           console.log("No featured products found.");
         }
@@ -137,7 +142,11 @@ export const Product: React.FC<KidsProps> = ({
 
   return (
     <div className="md:mt-20 flex flex-col w-screen mt-20 max-w-[80%] mx-auto">
-      <div className="flex gap-2 text-xl w-fit mb-3">
+      <div className="flex gap-2 text-xl w-fit mb-3" onClick={()=>{
+        console.log(category)
+        
+        navigateTo(category)
+      }}>
         <ArrowBigLeft size={28} color={"Red"} />
         Go Back
       </div>
@@ -189,16 +198,16 @@ export const Product: React.FC<KidsProps> = ({
             <div className="text-2xl text-gray-600 font-bold item_prize my-4">
               $ {productData?.price}
             </div>
-            <div className=" flex flex-row border-2 border-black w-fit">
-              <div className="px-5 py-2 border-r-2 text-lg">-</div>
-              <div className="px-10 py-2 border-r-2 text-lg">{}</div>
-              <div className="px-5 py-2 text-lg">+</div>
+            <div className=" flex flex-row border-2 border-black w-fit mb-3">
+              <div className="px-2 py-2 border-r-2 text-lg">-</div>
+              <div className="px-6 py-2 border-r-2 text-lg">{}</div>
+              <div className="px-2 py-2 text-lg">+</div>
             </div>
-            <div className="flex md:flex-row md:w-[100%] justify-between gap-4 flex-col my-4">
+            <div className="flex md:flex-row md:w-[100%] justify-between gap-4 flex-col  mt-5 mb-5">
               <div className="flex md:flex-row">
                 <button
                   onClick={handleAddToCart}
-                  className={` px-4 text-xl md:px-12 md:text-2xl flex border-4 border-black text-center ${
+                  className={`py-2 px-4 text-xl md:px-12 md:text-2xl flex border-4 border-black text-center ${
                     added === "ITEM ADDED"
                       ? "bg-orange-600 hover:brightness-160 text-white rounded-xl border-white"
                       : ""
@@ -209,13 +218,13 @@ export const Product: React.FC<KidsProps> = ({
                 </button>
               </div>
               <div>
-                <button className=" px-4 text-xl md:px-12 md:text-2xl flex border-black text-center hover:brightness-160 rounded-xl">
+                <button className=" py-2 px-4 text-xl md:px-12 md:text-2xl flex border-black text-center hover:brightness-160 rounded-xl">
                   <Heart
                     size={28}
                     style={{ marginRight: 8 }}
                     className="transition duration-300 hover:fill-orange-500 hover:stroke-orange-500"
                   />
-                  add to Wishlist
+                  Add to Wishlist
                 </button>
               </div>
             </div>
