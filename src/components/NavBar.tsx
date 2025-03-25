@@ -99,7 +99,7 @@ export const NavBar: React.FC<NavbarProps> = ({
                     e.preventDefault();
                     navigateTo(page);
                   }}
-                  className={`block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-orange-500 md:p-0 text-2xl ${
+                  className={`cursor-pointer block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-orange-500 md:p-0 text-2xl ${
                     currentPage === page
                     ? "text-orange-500 border-b-2 border-orange-500"
                     : "text-gray-900 hover:text-orange-500"
