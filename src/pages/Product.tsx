@@ -186,7 +186,7 @@ export const Product: React.FC<KidsProps> = ({
               ></div>
             </div>
             <div className=" flex flex-row border-b-2 w-full border-black"></div>
-            <div className="text-4xl text-gray-600 font-bold item_prize my-4">
+            <div className="text-2xl text-gray-600 font-bold item_prize my-4">
               $ {productData?.price}
             </div>
             <div className=" flex flex-row border-2 border-black w-fit">
