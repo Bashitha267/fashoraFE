@@ -6,8 +6,13 @@ import women from "../assets/womenfinal.png";
 
 
 
-
-export const ShopSection = () => {
+interface shopsection{
+  navigateTo:(category:string)=> void
+  
+}
+export const ShopSection:React.FC<shopsection> = (
+  {navigateTo}
+) => {
 
   const ShopSectionList = [
     {
@@ -23,7 +28,7 @@ export const ShopSection = () => {
       image: kids
     },
     {
-      name: "Footwears",
+      name: "Footwear",
       image: shoe
     }
   ];
@@ -41,7 +46,9 @@ export const ShopSection = () => {
       {/* Shop Categories Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5 pb-10 mx-auto px-4 md:px-0">
         {ShopSectionList.map((item) => (
-          <div key={item.name} className="flex flex-col items-center justify-center">
+          <div key={item.name} className="flex flex-col items-center justify-center" onClick={()=>{
+            navigateTo(item.name)
+          }}>
             <div className="relative overflow-hidden">
               <img src={item.image} className="object-contain hover:scale-105 ease-in-out transform duration-500" />
             </div>

@@ -64,7 +64,7 @@ function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <Home  />;
+        return <Home navigateto={navigateTo} />;
       case 'Women':
         return <Women display_cart={display_cart} />;
       case 'Men':
@@ -80,7 +80,7 @@ function App() {
       case 'login':
         return <Signup />;
       default:
-        return <Home  />;
+        return <Home navigateto={navigateTo}  />;
     }
   };
 
