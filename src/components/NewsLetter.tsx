@@ -3,14 +3,14 @@ import bgimage from '../assets/backgroundNews.png';
 export const NewsLetter = () => {
     return (
       
-        <div className="mt-16 md:max-w-[160vh] px-6 sm:mt-16 lg:px-8 mx-auto mb-6">
+        <div className="mt-16 w-screen px-6 sm:mt-16 lg:px-8 mx-auto mb-6 opacity-100">
           <div className="md:h-[50vh] relative isolate overflow-hidden  px-6 py-15 shadow-2xl rounded-2xl sm:rounded-3xl sm:px-24 xl:py-32" style={{
             backgroundImage: `url(${bgimage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
             height:'auto',
-            opacity:'40%'
+            opacity:'100%'
          
 
           }} >
@@ -18,7 +18,7 @@ export const NewsLetter = () => {
             Stay in Style, Stay Updated!
             </h2>
   
-            <p className="mx-auto mt-2 max-w-xl text-center text-lg leading-8 text-orange-500">
+            <p className="mx-auto mt-2 max-w-xl text-center text-lg leading-8 text-orange-500 ">
             Subscribe to Fashora’s newsletter and be the first to discover exclusive fashion trends, special offers, and latest arrivals. Don't miss out on the chicest styles—straight to your inbox!
             </p>
   
@@ -37,7 +37,7 @@ export const NewsLetter = () => {
               />
               <button
                 type="button"
-                className="flex-none rounded-md bg-white px-4 py-4 text-sm font-semibold text-gray-900 shadow-sm hover:bg-orange-500 focus-visible:outline  focus-visible:outline-offset-2 focus-visible:outline-orange-500 hover:text-white"
+                className="flex-none rounded-md bg-orange-500 text-white px-4 py-4 text-sm font-semibold  shadow-sm hover:bg-orange-600 focus-visible:outline  focus-visible:outline-offset-2 focus-visible:outline-orange-500 hover:text-white"
               >
                 Subscribe Us
               </button>

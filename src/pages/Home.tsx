@@ -2,6 +2,7 @@ import { Arrivals } from "../components/Arrivals";
 import { HomeSection } from "../components/HomeSection";
 import { NewsLetter } from "../components/NewsLetter";
 import { ShopSection } from "../components/ShopSection";
+import { SocialMedia } from "../components/SocialMedia";
 import '../components/home.css';
 
 // Define the type for props
@@ -19,6 +20,8 @@ export const Home:React.FC<home> = ({navigateto}) => {
         navigateto
       } />
       <NewsLetter/>
+      <SocialMedia/>
+    
     </div>
   );
 };
