@@ -9,7 +9,7 @@ export const NewsLetter = () => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            height:'40vh',
+            height:'70vh',
             opacity:'60%'
          
 
