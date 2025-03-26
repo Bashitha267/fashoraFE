@@ -4,13 +4,13 @@ export const NewsLetter = () => {
     return (
       
         <div className="mt-16 md:max-w-[160vh] px-6 sm:mt-16 lg:px-8 mx-auto mb-6">
-          <div className="relative isolate overflow-hidden  px-6 py-15 shadow-2xl rounded-2xl sm:rounded-3xl sm:px-24 xl:py-32" style={{
+          <div className="md:h-[50vh] relative isolate overflow-hidden  px-6 py-15 shadow-2xl rounded-2xl sm:rounded-3xl sm:px-24 xl:py-32" style={{
             backgroundImage: `url(${bgimage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            height:'70vh',
-            opacity:'60%'
+            height:'auto',
+            opacity:'40%'
          
 
           }} >
