@@ -6,6 +6,7 @@ interface Product {
   name: string;
   price: number;
   main_image:any;
+  additional_images:string;
   // other properties
 }
 interface KidsProps {
@@ -95,7 +96,24 @@ if(loading||loadingcolors){
         <div className="flex flex-col gap-1 " onClick={()=>{
           display_cart(items._id)
         }}>
-          <div className="relative overflow-hidden"><img src={items.main_image} className=" w-[50vh] h-[50vh] hover:scale-110 transform duration-500 ease-in-out"></img></div>
+          <div className="relative w-[40vh] h-[40vh] overflow-hidden">
+  {/* Main Image */}
+  <img
+    src={items.main_image}
+    className="absolute w-full h-full object-cover transition-opacity duration-500 ease-in-out hover:opacity-0"
+    
+  />
+  
+  {/* Second Image (Appears on Hover) */}
+
+  <img
+    src={items.additional_images[1]}
+    className="absolute w-full h-full object-cover opacity-0 transition-opacity duration-500 ease-in-out hover:opacity-100"
+    
+  />
+</div>
+
+          {/* <div className="relative overflow-hidden"><img src={items.main_image} className=" w-[50vh] h-[50vh]  transform duration-500 ease-in-out hover:opacity-0 "></img > <img src={items.additional_images[1]} className=" w-[50vh] h-[50vh]    opacity-0 transition-opacity duration-500 ease-in-out hover:opacity-100 "></img></div> */}
           <div className="flex justify-center  font-semibold section_name text-lg text-[#2F2F2F] ">{items.name}</div>
           <div className="flex justify-center section_name font-bold text-xl text-[#222222]">${items.price}</div>
 

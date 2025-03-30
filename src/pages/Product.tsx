@@ -26,6 +26,7 @@ interface Product {
   category: string;
   country: string;
   id: string;
+  qty:number;
 }
 
 export const Product: React.FC<KidsProps> = ({
@@ -40,6 +41,7 @@ export const Product: React.FC<KidsProps> = ({
   const [category, setCategory] = useState<string>("");
   const [added, setAdded] = useState("ADD TO CART");
   const [emblaRef] = useEmblaCarousel({ loop: false });
+  const[qty,setQty]=useState(1);
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
@@ -52,6 +54,7 @@ export const Product: React.FC<KidsProps> = ({
           setCategory(response.data.category);
          
           setAdded("ADD TO CART")
+          setQty(1);
         } else {
           console.log("No product found.");
         }
@@ -117,7 +120,7 @@ export const Product: React.FC<KidsProps> = ({
         price,
         color,
         size,
-
+        qty,
         image: main_image,
       };
       addToCart(productToAdd);
@@ -199,9 +202,15 @@ export const Product: React.FC<KidsProps> = ({
               $ {productData?.price}
             </div>
             <div className=" flex flex-row border-2 border-black w-fit mb-3">
-              <div className="px-2 py-2 border-r-2 text-lg">-</div>
-              <div className="px-6 py-2 border-r-2 text-lg">{}</div>
-              <div className="px-2 py-2 text-lg">+</div>
+              <div className="px-2 py-2 border-r-2 text-lg" onClick={()=>{
+                if(qty<=1)
+                  return
+                else setQty(qty-1);
+              }}>-</div>
+              <div className="px-6 py-2 border-r-2 text-lg">{qty}</div>
+              <div className="px-2 py-2 text-lg" onClick={()=>{
+                setQty(qty+1);
+              }}>+</div>
             </div>
             <div className="flex md:flex-row md:w-[100%] justify-between gap-4 flex-col  mt-5 mb-5">
               <div className="flex md:flex-row">

@@ -1,7 +1,3 @@
-import shoe from "../assets/footwearfinl.jpg";
-import kids from "../assets/kids final.jpg";
-import men from "../assets/menfinal.jpg";
-import women from "../assets/womenfinal.png";
 
 
 
@@ -17,19 +13,19 @@ export const ShopSection:React.FC<shopsection> = (
   const ShopSectionList = [
     {
       name: "Men",
-      image: men
+      image: "https://res.cloudinary.com/dnfbik3if/image/upload/v1743228794/men4_mf9bha.jpg"
     },
     {
       name: "Women",
-      image: women
+      image: "https://res.cloudinary.com/dnfbik3if/image/upload/v1743228799/women_jpbuve.png"
     },
     {
       name: "Kids",
-      image: kids
+      image: "https://res.cloudinary.com/dnfbik3if/image/upload/v1743228790/kid_wfcvei.jpg"
     },
     {
       name: "Footwear",
-      image: shoe
+      image: "https://res.cloudinary.com/dnfbik3if/image/upload/v1743231855/shoe2_fgtkd2.jpg"
     }
   ];
 
@@ -46,13 +42,18 @@ export const ShopSection:React.FC<shopsection> = (
       {/* Shop Categories Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5 pb-10 mx-auto px-4 md:px-0">
         {ShopSectionList.map((item) => (
-          <div key={item.name} className="flex flex-col items-center justify-center" onClick={()=>{
+          <div key={item.name} className=" relative flex flex-col items-center justify-center" onClick={()=>{
             navigateTo(item.name)
           }}>
             <div className="relative overflow-hidden">
-              <img src={item.image} className="object-contain hover:scale-105 ease-in-out transform duration-500" />
+              <img src={item.image} className="object-cover w-[60vh] h-[70vh] duration-500" />
+              <div className="w-[50vh] absolute bottom-6 left-1/2 transform -translate-x-1/2  items-center text-center flex flex-col ">
+                
+                <div className="backdrop-blur-md text-white border-4 border-white flex text-center px-30 py-3 text-xl hover:bg-white hover:text-black font-bold">SHOP NOW</div>
+              </div>
+              
+             
             </div>
-            <div className="flex justify-center text-2xl mt-1 section_name font-bold text-[#616265]">{item.name}</div>
           </div>
         ))}
       </div>

@@ -33,31 +33,44 @@ font-family: 'Poppins';
 font-family: 'Montserrat';
 
 }
-/* Change arrow color, size, and position */
+/* Ensure the slick slider container has proper positioning */
+.slick-slider {
+  position: relative; /* Make sure the container is positioned */
+  overflow: hidden; /* Prevents arrows from overflowing */
+}
+
+/* Arrow styles */
 .slick-prev,
 .slick-next {
-  z-index: 10;
-  width: 40px;
-  height: 40px;
+  z-index: 20;
+  position: absolute;
+  top: 50%; /* Centers arrows vertically */
+  transform: translateY(-50%); /* Ensures perfect vertical centering */
+  width: 50px;
+  height: 50px;
 }
 
 /* Custom left arrow */
 .slick-prev {
-  left: -50px; /* Move left */
-}
-.slick-prev:before {
-  color: orange !important; /* Change arrow color */
-  font-size: 30px !important; /* Increase size */
+  left: 10px;
+   /* Adjust distance from the left */
 }
 
 /* Custom right arrow */
 .slick-next {
-  right: -50px; /* Move right */
+  right: 10px; /* Adjust distance from the right */
 }
+
+/* Styling arrows */
+.slick-prev:before,
 .slick-next:before {
-  color: orange !important;
-  font-size: 30px !important;
+  /* Ensure arrows are being rendered */
+  color: black !important; /* Change arrow color to black */
+  font-size: 60px !important; /* Adjust size */
+  background: transparent !important; /* Ensure no background */
+  
 }
+
 .section_name{
   font-family: 'Montserrat', sans-serif;
   font-weight: 35px;

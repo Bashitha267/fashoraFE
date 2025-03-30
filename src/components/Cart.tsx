@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 interface CartProps {
   isOpen: boolean;
   toggleCart: () => void;
-  cartItems: { id: number; name: string; price: number; quantity: number; image: string }[]; // Define the structure of cart items
+  cartItems: { id: number; name: string; price: number; qty: number; image: string }[]; // Define the structure of cart items
   setCartItems: React.Dispatch<React.SetStateAction<{ id: number; name: string; price: number; quantity: number; image: string }[]>>; // SetState function type
 }
 
@@ -22,7 +22,7 @@ export const Cart: React.FC<CartProps> = ({ isOpen, toggleCart, cartItems, setCa
   }, [cartItems]);
 
   const subtotal = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + item.price * item.qty,
     0
   );
   const shipping = 4.99;
@@ -38,7 +38,7 @@ export const Cart: React.FC<CartProps> = ({ isOpen, toggleCart, cartItems, setCa
     }
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: newQty } : item
+        item.id === id ? { ...item, qty: newQty } : item
       )
     );
   };
@@ -85,14 +85,14 @@ export const Cart: React.FC<CartProps> = ({ isOpen, toggleCart, cartItems, setCa
                       <div className="inline-flex gap-2 border-2 border-gray-100 w-fit">
                         <div
                           className="p-1 hover:bg-gray-100 px-2"
-                          onClick={() => updateQty(item.id, item.quantity - 1)}
+                          onClick={() => updateQty(item.id, item.qty - 1)}
                         >
                           -
                         </div>
-                        <div className="p-1">{item.quantity}</div>
+                        <div className="p-1">{item.qty}</div>
                         <div
                           className="p-1 hover:bg-gray-100 px-2"
-                          onClick={() => updateQty(item.id, item.quantity + 1)}
+                          onClick={() => updateQty(item.id, item.qty + 1)}
                         >
                           +
                         </div>
@@ -136,8 +136,8 @@ export const Cart: React.FC<CartProps> = ({ isOpen, toggleCart, cartItems, setCa
                 </div>
               )}
               {cartItems.length > 0 && (
-                <div className="absolute -bottom-4 right-0 border-t-2 border-black flex flex-col w-full gap-2 p-6 z-25 bg-white">
-                  <div className="flex flex-row justify-between">
+                <div className="absolute -bottom-15 right-0 border-t-2 border-black flex flex-col w-full gap-2 px-3 mb-20  z-25 bg-white">
+                  <div className="flex flex-row justify-between mt-1">
                     <div className="font-bold">Subtotal</div>
                     <div>{subtotal.toFixed(2)}</div>
                   </div>
@@ -159,7 +159,7 @@ export const Cart: React.FC<CartProps> = ({ isOpen, toggleCart, cartItems, setCa
                     <button>Checkout</button>
                   </div>
 
-                  <div className="flex flex-row justify-center text-gray-500 mt-3">
+                  <div className="flex flex-row justify-center text-gray-500 ">
                     or{" "}
                     <span className="px-2 text-pink-500 text-md font-sans">
                       <button onClick={toggleCart}>Continue Shopping</button>
