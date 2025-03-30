@@ -17,6 +17,7 @@ export const Women:React.FC<KidsProps> = ({display_cart}) => {
   const [loading,setloading]=useState(false)
   const [loadingcolors,setloadingcolors]=useState(false)
 
+
   const[colors,setcolors]=useState([]);
 useEffect(()=>{
   const fetchProduct=async()=>{
@@ -83,16 +84,16 @@ if(loading||loadingcolors){
         </div>
       </div>
 
-    <div className="mt-10 md:grid md:grid-cols-4 gap-8 flex flex-col">
+    <div className="mt-10 md:grid md:grid-cols-6 gap-4 flex flex-col">
       {productData.map((items)=>(
         <div className="flex flex-col gap-1 " onClick={()=>{
           display_cart(items._id)
         }}>
-           <div className="relative w-[40vh] h-[40vh] overflow-hidden">
+           <div className="relative  overflow-hidden">
   {/* Main Image */}
   <img
     src={items.main_image}
-    className="absolute w-full h-full object-cover transition-opacity duration-500 ease-in-out hover:opacity-0"
+    className="absolute w-[40vh] h-[40vh] object-cover transition-opacity duration-500 ease-in-out hover:opacity-0"
     
   />
   
@@ -100,7 +101,7 @@ if(loading||loadingcolors){
 
   <img
     src={items.additional_images[1]}
-    className="absolute w-full h-full object-cover opacity-0 transition-opacity duration-500 ease-in-out hover:opacity-100"
+    className="absolute w-[40vh] h-[40vh] object-cover opacity-0 transition-opacity duration-500 ease-in-out hover:opacity-100"
     
   />
 </div>
