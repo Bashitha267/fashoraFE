@@ -2,10 +2,22 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 export const Hometitle = () => {
+  const images=[
+    "https://res.cloudinary.com/dnfbik3if/image/upload/v1743495679/Simple_Modern_Photo_Collage_Autumn_Fashion_Sale_Banner_p1abux.jpg",
+    "https://res.cloudinary.com/dnfbik3if/image/upload/v1743495432/Fashion_Trend_Banner_Landscape_ehvohe.jpg",
+    "https://res.cloudinary.com/dnfbik3if/image/upload/v1743495432/Brown_Minimalist_New_Arrival_Promo_Banner_laivtq.jpg",
+
+
+
+
+  ]
     const settings = {
+      
         arrows: true, // Enable arrows by default
         infinite: true,
         speed: 500,
+        autoplay:true,
+        autoplaySpeed: 3000,
         slidesToShow: 1,
         slidesToScroll: 1,
         responsive: [
@@ -28,12 +40,11 @@ export const Hometitle = () => {
       
   return (
     
-    <div className="mt-20 md:max-w-[170vh] mx-auto w-screen bg-amber-500  relative flex items-center">
+    <div className="mt-20 md:max-w-[170vh] mx-auto w-screen   relative flex items-center">
         <Slider {...settings} className="h-[70vh]">
-            <div>dsasdasd</div>
-            <div>fsfasaf</div>
-            <div>fssaafss</div>
-            <div>afasfssf</div>
+            {images.map((item)=>(
+              <div><img src={item}></img></div>
+            ))}
 
         </Slider>
     </div>
