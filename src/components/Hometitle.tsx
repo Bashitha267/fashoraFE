@@ -40,10 +40,10 @@ export const Hometitle = () => {
       
   return (
     
-    <div className="mt-20 md:max-w-[170vh] mx-auto w-screen   relative flex items-center">
-        <Slider {...settings} className="h-[70vh]">
+    <div className="mt-20 md:max-w-[170vh] mx-auto w-screen   relative flex items-center bg-amber-400">
+        <Slider {...settings} className="h-[60vh] md:h-[80vh]">
             {images.map((item)=>(
-              <div><img src={item}></img></div>
+              <div><img src={item} className=" overflow-hidden md:object-cover h-[70vh]  md:h-full md:w-full md:p-0 p-1"></img></div>
             ))}
 
         </Slider>
