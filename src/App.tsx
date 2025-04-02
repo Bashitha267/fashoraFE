@@ -73,7 +73,7 @@ function App() {
         return <Product addToCart={addToCart} productID={productId} display_cart={display_cart} navigateTo={navigateTo} />;
       case 'Kids':
         return <Kids display_cart={display_cart} />;
-      case 'Footwear':
+      case 'Shoes':
         return <Other display_cart={display_cart} />;
       case 'fav':
         return <Favourite />;
