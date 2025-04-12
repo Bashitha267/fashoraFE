@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { Motion, spring } from 'react-motion';
 
 interface ShopSectionProps {
   navigateTo: (category: string) => void;
@@ -42,59 +42,39 @@ export const ShopSection: React.FC<ShopSectionProps> = ({ navigateTo }) => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5 pb-10 mx-auto px-4 md:px-0">
         {ShopSectionList.map((item, index) => {
           const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
-          const direction = index % 2 === 0 ? -200 : 200;
-
           const [show, setShow] = useState(false);
 
+          // Staggered animation delay
           useEffect(() => {
             if (inView) {
-              const timer = setTimeout(() => {
-                setShow(true);
-              }, index * 500); // 2s delay * index
+              const timer = setTimeout(() => setShow(true), index * 2000); // 2s delay per index
               return () => clearTimeout(timer);
             }
           }, [inView, index]);
 
           return (
-            <div
+            <motion.div
               key={item.name}
               ref={ref}
               className="relative flex flex-col items-center justify-center cursor-pointer"
               onClick={() => navigateTo(item.name)}
+              initial={{ x: index % 2 === 0 ? -200 : 200, opacity: 0 }}
+              animate={show ? { x: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.8 }}
             >
-              <Motion
-                defaultStyle={{ x: direction, opacity: 0 }}
-                style={{
-                  x: show
-                    ? spring(0, { stiffness: 60, damping: 15 })
-                    : spring(direction),
-                  opacity: show ? spring(1) : spring(0),
-                }}
-              >
-                {(style) => (
-                  <div
-                    style={{
-                      transform: `translateX(${style.x}px)`,
-                      opacity: style.opacity,
-                      width: '100%',
-                    }}
-                  >
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="object-cover w-[60vh] h-[70vh] duration-500"
-                      />
-                      <div className="w-[50vh] absolute bottom-6 left-1/2 transform -translate-x-1/2 items-center text-center flex flex-col">
-                        <div className="backdrop-blur-md text-white border-4 border-white flex text-center px-30 py-3 text-xl hover:bg-white hover:text-black font-bold">
-                          SHOP NOW
-                        </div>
-                      </div>
-                    </div>
+              <div className="relative overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="object-cover w-[60vh] h-[70vh] duration-500"
+                />
+                <div className="w-[50vh] absolute bottom-6 left-1/2 transform -translate-x-1/2 items-center text-center flex flex-col">
+                  <div className="backdrop-blur-md text-white border-4 border-white flex text-center px-30 py-3 text-xl hover:bg-white hover:text-black font-bold">
+                    SHOP NOW
                   </div>
-                )}
-              </Motion>
-            </div>
+                </div>
+              </div>
+            </motion.div>
           );
         })}
       </div>
