@@ -27,7 +27,7 @@ export const ShopSection: React.FC<ShopSectionProps> = ({ navigateTo }) => {
   ];
 
   return (
-    <div className="flex flex-col w-screen max-w-[80%] md:max-w-[160vh] mx-auto md:gap-5 md:mt-5">
+    <div className="flex flex-col w-screen max-w-[80%] md:max-w-[160vh] mx-auto md:gap-5 md:mt-20">
       {/* Header */}
       <div className="py-10 flex justify-center">
         <div className="bg-white w-full md:max-w-5xl max-w-[80%] py-5 flex justify-center items-center relative">

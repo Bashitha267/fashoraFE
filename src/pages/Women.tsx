@@ -93,7 +93,7 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
             className="flex flex-col gap-1 cursor-pointer"
             onClick={() => display_cart(item._id)}
           >
-            <div className="relative md:w-[40vh] md:h-[40vh] w-[18vh] h-[20vh] overflow-hidden">
+            <div className="relative md:w-[40vh] md:h-[40vh] w-[18vh] h-[25vh] overflow-hidden">
               {/* Main Image */}
               <img
                 src={item.main_image}
