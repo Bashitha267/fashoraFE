@@ -93,12 +93,12 @@ if(loading||loadingcolors){
 
 
 
-    <div className="mt-10 md:grid md:grid-cols-4 gap-8 flex flex-col">
+    <div className="mt-10 md:grid md:grid-cols-4 grid grid-cols-2 md:gap-8  gap-5">
       {productData.map((items)=>(
         <div className="flex flex-col gap-1 " onClick={()=>
           display_cart(items._id)
         }>
-           <div className="relative w-[40vh] h-[40vh] overflow-hidden">
+           <div className="relative md:w-[40vh] md:h-[40vh] w-[18vh] h-[20vh] overflow-hidden ">
   {/* Main Image */}
   <img
     src={items.main_image}

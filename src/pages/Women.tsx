@@ -86,14 +86,14 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
       </div>
 
       {/* Products Grid */}
-      <div className="mt-10 md:grid md:grid-cols-4 gap-8 flex flex-col">
+      <div className="mt-10 md:grid md:grid-cols-4 grid grid-cols-2 md:gap-8  gap-5">
         {productData.map((item) => (
           <div 
             key={item._id}
             className="flex flex-col gap-1 cursor-pointer"
             onClick={() => display_cart(item._id)}
           >
-            <div className="relative overflow-hidden w-full aspect-square">
+            <div className="relative md:w-[40vh] md:h-[40vh] w-[18vh] h-[20vh] overflow-hidden">
               {/* Main Image */}
               <img
                 src={item.main_image}
