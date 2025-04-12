@@ -91,12 +91,12 @@ if(loading||loadingcolors){
 
 
 
-    <div className="mt-10 md:grid md:grid-cols-4 gap-8 flex flex-col" >
+    <div className="mt-10 md:grid md:grid-cols-4 grid grid-cols-2 md:gap-8  gap-5" >
       {productData.map((items)=>(
         <div className="flex flex-col gap-1 " onClick={()=>{
           display_cart(items._id)
         }}>
-          <div className="relative w-[40vh] h-[40vh] overflow-hidden">
+          <div className="relative md:w-[40vh] md:h-[40vh] w-[18vh] h-[20vh] overflow-hidden ">
   {/* Main Image */}
   <img
     src={items.main_image}
@@ -114,8 +114,8 @@ if(loading||loadingcolors){
 </div>
 
           {/* <div className="relative overflow-hidden"><img src={items.main_image} className=" w-[50vh] h-[50vh]  transform duration-500 ease-in-out hover:opacity-0 "></img > <img src={items.additional_images[1]} className=" w-[50vh] h-[50vh]    opacity-0 transition-opacity duration-500 ease-in-out hover:opacity-100 "></img></div> */}
-          <div className="flex justify-center  font-semibold section_name text-lg text-[#2F2F2F] ">{items.name}</div>
-          <div className="flex justify-center section_name font-bold text-xl text-[#222222]">${items.price}</div>
+          <div className="flex justify-center  font-semibold section_name md:text-lg text-sm text-[#2F2F2F] w-full ">{items.name}</div>
+          <div className="flex justify-center section_name font-bold md:text-xl text-lg text-[#222222]">${items.price}</div>
 
 
 
