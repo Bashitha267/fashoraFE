@@ -1,11 +1,13 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import { BrandC } from "../components/BrandC";
+import '../components/home.css';
 import { Hometitle } from "../components/Hometitle";
+import { NewArrivals } from "../components/NewArrivals";
 import { NewsLetter } from "../components/NewsLetter";
 import { ShopSection } from "../components/ShopSection";
 import { SocialMedia } from "../components/SocialMedia";
-import '../components/home.css';
 interface HomeProps {
   navigateto: (category: string) => void;
 }
@@ -67,6 +69,10 @@ export const Home: React.FC<HomeProps> = ({ navigateto }) => {
 
       <RevealOnScroll>
         <SocialMedia />
+      </RevealOnScroll>
+      <BrandC/>
+      <RevealOnScroll>
+        <NewArrivals/>
       </RevealOnScroll>
     </div>
   );

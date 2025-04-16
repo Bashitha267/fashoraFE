@@ -47,7 +47,7 @@ export const ShopSection: React.FC<ShopSectionProps> = ({ navigateTo }) => {
           // Staggered animation delay
           useEffect(() => {
             if (inView) {
-              const timer = setTimeout(() => setShow(true), index * 500); // 2s delay per index
+              const timer = setTimeout(() => setShow(true), index * 200); // 2s delay per index
               return () => clearTimeout(timer);
             }
           }, [inView, index]);

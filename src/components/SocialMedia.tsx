@@ -11,14 +11,14 @@ export const SocialMedia = () => {
     "https://res.cloudinary.com/dnfbik3if/image/upload/v1743008546/Beige_and_Green_Clothing_Store_Sustainable_Beauty_Instagram_Stories_vevzo0.jpg",
   ];
   return (
-    <div className="w-screen relative ">
-      <div className="w-full max-w-[160vh] mx-auto mt-5 grid md:grid-cols-6 grid-cols-2 gap-2 mb-10 px-4">
+    <div className=" relative ">
+      <div className=" max-w-[160vh] mx-auto mt-5 grid md:grid-cols-6 grid-cols-2 gap-2 mb-10 px-4">
         {img.map((item) => (
           <div>
             <img
               src={item}
               alt="social media"
-              className="md:h-[50vh] w-full md:object-cover h-[20vh] "
+              className="md:h-[50vh]  md:object-cover h-[20vh] "
             ></img>
           </div>
         ))}
