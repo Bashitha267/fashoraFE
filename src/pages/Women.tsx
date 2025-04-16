@@ -53,14 +53,14 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
 
   if (loading || loadingColors) {
     return (
-      <div className="mt-20 w-full md:max-w-[160vh] mx-auto flex justify-center items-center h-[80vh]">
+      <div className="mt-55 w-full md:max-w-[160vh] mx-auto flex justify-center items-center h-[80vh]">
         <ThreeDot variant="pulsate" color="#FF6900" size="large" />
       </div>
     );
   }
 
   return (
-    <div className="mt-20 w-full md:max-w-[160vh] mx-auto px-4">
+    <div className="md:mt-55 mt-38 w-full md:max-w-[160vh] mx-auto px-4">
       {/* Filters Section */}
       <div className="w-full flex flex-row border-2 border-[#6F6F6F] gap-2">
         <div className="p-6 md:w-[40vh]">

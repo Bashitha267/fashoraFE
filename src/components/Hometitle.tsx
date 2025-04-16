@@ -36,7 +36,7 @@ export const Hometitle = () => {
   };
 
   return (
-    <div className="mt-20 max-w-screen-xl md:max-w-[160vh] mx-auto w-full relative flex items-center md:h-[70vh]">
+    <div className="mt-25 max-w-screen-xl md:max-w-[160vh] mx-auto w-full relative flex items-center md:h-[70vh]">
       <Slider {...settings} className="w-full h-full">
         {images.map((item, index) => (
           <div key={index}>

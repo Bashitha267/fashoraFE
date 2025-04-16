@@ -126,7 +126,7 @@ export const Product: React.FC<KidsProps> = ({
   }
 
   return (
-    <div className="md:mt-20 flex flex-col w-screen mt-20 max-w-[80%] mx-auto">
+    <div className="md:mt-55 flex flex-col w-screen mt-40 max-w-[80%] mx-auto">
       {/* Main Product Section */}
       <div className="flex md:p-3 md:mx-auto md:max-w-[150vh]">
         <div className="md:flex md:flex-row md:gap-9 md:justify-evenly w-full">

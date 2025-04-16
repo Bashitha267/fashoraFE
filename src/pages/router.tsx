@@ -10,6 +10,7 @@ import { Signup } from '../pages/Signup';
 import { Women } from '../pages/Women';
 import { Accessories } from './Accessories';
 import { Beauty } from './Beauty';
+import { Brands } from './Brands';
 import { New } from './New';
 import { Sale } from './Sale';
 
@@ -41,7 +42,8 @@ const createRouter = (
         {path:'new',element:<New/>},
         {path:'beauty',element:<Beauty/>},
         {path:'sale',element:<Sale/>},
-        {path:'accessories',element:<Accessories/>}
+        {path:'accessories',element:<Accessories/>},
+        {path:'brands',element:<Brands/>}
       ]
     }
   ]);

@@ -59,20 +59,25 @@ useEffect(()=>{
 },[])
 
 if(loading||loadingcolors){
-  return <div className="mt-20 w-screen md:max-w-[160vh] mx-auto max-w-[80%] flex justify-center items-center h-[80vh]"><ThreeDot variant="pulsate" color="#FF6900" size="large" text="" textColor=""  speedPlus={0} /></div>
+  return <div className="mt-25 w-screen md:max-w-[160vh] mx-auto max-w-[80%] flex justify-center items-center h-[80vh]"><ThreeDot variant="pulsate" color="#FF6900" size="large" text="" textColor=""  speedPlus={0} /></div>
 }
   return (
-    <div className="mt-20 w-screen md:max-w-[160vh] mx-auto  flex flex-col">
+    <div className="md:mt-55 mt-38 w-full md:max-w-[160vh] mx-auto px-4">
   
   <div className=" w-screen max-w-[100%] md:max-w-[160vh] md:mx-auto  flex flex-row border-2 border-[#6F6F6F] gap-2">
         <div className="p-6 md:w-[40vh]">
           <div className="flex-col flex gap-5">
-            <div className="section_name md:text-xl font-bold">SIZE</div>
-            {/* <div className="flex md:flex-row flex-col  md:gap-4 gap-2">
-              {sizes.map((item) => (
-                <div className="section_name md:text-lg "><button className="  bg-gray-200 px-1 py-1 hover:bg-gray-400 w-8 h-8 md:h-12 md:w-12 text-lg">{item}</button></div>
-              ))}
-            </div> */}
+          <div className="section_name md:text-xl font-bold">SIZE</div>
+            <div className="flex gap-2 flex-wrap">
+              {["XS", "S", "M", "L"].map((size) => (
+                <button
+                  key={size}
+                  className="border px-3 py-1 text-sm hover:bg-gray-200 transition"
+                >
+                  {size}
+                </button>
+              ))}</div>
+           
           </div>
         </div>
         <div className="border-l-2 border-[#E1E1E1] md:block hidden"></div>

@@ -1,6 +1,6 @@
 import { Heart, Menu, Search, ShoppingCart, User, X } from "lucide-react";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from '../assets/logo2.jpg';
 import './navbar.css';
 interface NavbarProps {
@@ -24,7 +24,7 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
     {name:"Accessories",path:"/accessories"},
     
   ];
-  const currentPage=useLocation()
+  
  
   return (
     <div className="bg-white fixed w-screen z-150 top-0 start-0 border-b border-gray-200 py-2">
