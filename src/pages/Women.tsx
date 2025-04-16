@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ThreeDot } from "react-loading-indicators";
+import { Link } from "react-router-dom";
 
 interface KidsProps {
   display_cart: (id: string) => void;
@@ -39,7 +40,7 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`https://fashorabe26.onrender.com/getWomen`);
+        const response = await axios.get('https://fashorabe26.onrender.com/getWomen');
         setProductData(response.data);
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -52,19 +53,29 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
 
   if (loading || loadingColors) {
     return (
-      <div className="mt-20 w-screen md:max-w-[160vh] mx-auto max-w-[80%] flex justify-center items-center h-[80vh]">
+      <div className="mt-20 w-full md:max-w-[160vh] mx-auto flex justify-center items-center h-[80vh]">
         <ThreeDot variant="pulsate" color="#FF6900" size="large" />
       </div>
     );
   }
 
   return (
-    <div className="mt-20 w-screen md:max-w-[160vh] mx-auto max-w-[80%]">
+    <div className="mt-20 w-full md:max-w-[160vh] mx-auto px-4">
       {/* Filters Section */}
-      <div className="w-screen max-w-[100%] md:max-w-[160vh] md:mx-auto flex flex-row border-2 border-[#6F6F6F] gap-2">
+      <div className="w-full flex flex-row border-2 border-[#6F6F6F] gap-2">
         <div className="p-6 md:w-[40vh]">
           <div className="flex-col flex gap-5">
             <div className="section_name md:text-xl font-bold">SIZE</div>
+            <div className="flex gap-2 flex-wrap">
+              {["XS", "S", "M", "L"].map((size) => (
+                <button
+                  key={size}
+                  className="border px-3 py-1 text-sm hover:bg-gray-200 transition"
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
         <div className="border-l-2 border-[#E1E1E1] md:block hidden"></div>
@@ -73,9 +84,9 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
             <div className="section_name md:text-xl font-bold">COLOR</div>
             <div className="md:flex md:flex-row grid grid-cols-5 md:gap-4 gap-2">
               {colors.map((color, index) => (
-                <div 
+                <div
                   key={index}
-                  className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#3F3F3D]"
+                  className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#3F3F3D] cursor-pointer"
                   style={{ backgroundColor: color }}
                   title={`Color ${index + 1}`}
                 />
@@ -86,29 +97,30 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
       </div>
 
       {/* Products Grid */}
-      <div className="mt-10 md:grid md:grid-cols-4 grid grid-cols-2 md:gap-8  gap-5">
+      <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
         {productData.map((item) => (
-          <div 
+          <Link
+            to={`/product/${item._id}`}
             key={item._id}
             className="flex flex-col gap-1 cursor-pointer"
             onClick={() => display_cart(item._id)}
           >
-            <div className="relative md:w-[40vh] md:h-[40vh] w-[18vh] h-[25vh] overflow-hidden">
+            <div className="relative md:w-[40vh] md:h-[40vh] w-[18vh] h-[25vh] overflow-hidden group">
               {/* Main Image */}
               <img
                 src={item.main_image}
-                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out"
+                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out group-hover:opacity-0"
                 alt={item.name}
                 onError={(e) => {
                   e.currentTarget.src = 'https://via.placeholder.com/400x400?text=Image+Not+Available';
                 }}
               />
-              
+
               {/* Hover Image */}
-              {item.additional_images && item.additional_images.length > 0 && (
+              {item.additional_images?.[0] && (
                 <img
                   src={item.additional_images[0]}
-                  className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 ease-in-out hover:opacity-100"
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100"
                   alt={item.name}
                   onError={(e) => {
                     e.currentTarget.src = 'https://via.placeholder.com/400x400?text=Image+Not+Available';
@@ -122,7 +134,7 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
             <div className="flex justify-center section_name font-bold text-xl text-[#222222]">
               ${item.price}
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ThreeDot } from "react-loading-indicators";
+import { Link } from "react-router-dom";
+
 interface KidsProps {
   display_cart: any; // You can specify the actual type of display_cart if possible
 }
@@ -94,37 +96,44 @@ if(loading||loadingcolors){
 
 
     <div className="mt-10 md:grid md:grid-cols-4 grid grid-cols-2 md:gap-8  gap-5">
-      {productData.map((items)=>(
-        <div className="flex flex-col gap-1 " onClick={()=>
-          display_cart(items._id)
-        }>
-           <div className="relative md:w-[40vh] md:h-[40vh] w-[18vh] h-[20vh] overflow-hidden ">
-  {/* Main Image */}
-  <img
-    src={items.main_image}
-    className="absolute w-full h-full object-cover transition-opacity duration-500 ease-in-out hover:opacity-0"
-    
-  />
-  
-  {/* Second Image (Appears on Hover) */}
+    {productData.map((item) => (
+          <Link
+            to={`/product/${item._id}`}
+            key={item._id}
+            className="flex flex-col gap-1 cursor-pointer"
+            onClick={() => display_cart(item._id)}
+          >
+            <div className="relative md:w-[40vh] md:h-[40vh] w-[18vh] h-[25vh] overflow-hidden group">
+              {/* Main Image */}
+              <img
+                src={item.main_image}
+                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out group-hover:opacity-0"
+                alt={item.name}
+                onError={(e) => {
+                  e.currentTarget.src = 'https://via.placeholder.com/400x400?text=Image+Not+Available';
+                }}
+              />
 
-  <img
-    src={items.additional_images[1]}
-    className="absolute w-full h-full object-cover opacity-0 transition-opacity duration-500 ease-in-out hover:opacity-100"
-    
-  />
-</div>
-          {/* <div className="relative overflow-hidden"><img src={items.main_image} className=" w-[50vh] h-[50vh] hover:scale-110 transform duration-500 ease-in-out"></img></div> */}
-          <div className="flex justify-center  font-semibold section_name text-lg text-[#2F2F2F] ">{items.name}</div>
-          <div className="flex justify-center section_name font-bold text-xl text-[#222222]">${items.price}</div>
-
-
-
-        </div>
-
-
-
-      ))}
+              {/* Hover Image */}
+              {item.additional_images?.[0] && (
+                <img
+                  src={item.additional_images[0]}
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100"
+                  alt={item.name}
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://via.placeholder.com/400x400?text=Image+Not+Available';
+                  }}
+                />
+              )}
+            </div>
+            <div className="flex justify-center font-semibold section_name text-lg text-[#2F2F2F]">
+              {item.name}
+            </div>
+            <div className="flex justify-center section_name font-bold text-xl text-[#222222]">
+              ${item.price}
+            </div>
+          </Link>
+        ))}
     </div>
      </div>
   )

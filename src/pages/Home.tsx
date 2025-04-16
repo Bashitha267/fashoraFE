@@ -8,9 +8,7 @@ import { NewArrivals } from "../components/NewArrivals";
 import { NewsLetter } from "../components/NewsLetter";
 import { ShopSection } from "../components/ShopSection";
 import { SocialMedia } from "../components/SocialMedia";
-interface HomeProps {
-  navigateto: (category: string) => void;
-}
+
 
 // Animation like @keyframes appear
 const scrollVariant = {
@@ -52,7 +50,7 @@ const RevealOnScroll: React.FC<{ children: React.ReactNode }> = ({ children }) =
   );
 };
 
-export const Home: React.FC<HomeProps> = ({ navigateto }) => {
+export const Home= () => {
   return (
     <div className="w-screen md:max-w-[170vh] mx-auto">
       {/* Hometitle - No animation */}
@@ -60,7 +58,7 @@ export const Home: React.FC<HomeProps> = ({ navigateto }) => {
 
       {/* Animated sections */}
       <RevealOnScroll>
-        <ShopSection navigateTo={navigateto} />
+        <ShopSection/>
       </RevealOnScroll>
 
       <RevealOnScroll>

@@ -1,28 +1,31 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { Link } from 'react-router-dom';
 
-interface ShopSectionProps {
-  navigateTo: (category: string) => void;
-}
 
-export const ShopSection: React.FC<ShopSectionProps> = ({ navigateTo }) => {
+
+export const ShopSection= () => {
   const ShopSectionList = [
     {
       name: 'Men',
       image: 'https://res.cloudinary.com/dnfbik3if/image/upload/v1743228794/men4_mf9bha.jpg',
+      path:'/men',
     },
     {
       name: 'Women',
       image: 'https://res.cloudinary.com/dnfbik3if/image/upload/v1743228799/women_jpbuve.png',
+      path:'/women',
     },
     {
       name: 'Kids',
       image: 'https://res.cloudinary.com/dnfbik3if/image/upload/v1743228790/kid_wfcvei.jpg',
+      path:'/kids',
     },
     {
       name: 'Footwear',
       image: 'https://res.cloudinary.com/dnfbik3if/image/upload/v1743231855/shoe2_fgtkd2.jpg',
+      path:'shoes',
     },
   ];
 
@@ -57,7 +60,7 @@ export const ShopSection: React.FC<ShopSectionProps> = ({ navigateTo }) => {
               key={item.name}
               ref={ref}
               className="relative flex flex-col items-center justify-center cursor-pointer"
-              onClick={() => navigateTo(item.name)}
+              
               initial={{ x: index % 2 === 0 ? -200 : 200, opacity: 0 }}
               animate={show ? { x: 0, opacity: 1 } : {}}
               transition={{ duration: 0.8 }}
@@ -70,7 +73,7 @@ export const ShopSection: React.FC<ShopSectionProps> = ({ navigateTo }) => {
                 />
                 <div className="w-[50vh] absolute bottom-6 left-1/2 transform -translate-x-1/2 items-center text-center flex flex-col">
                   <div className="backdrop-blur-md text-white border-4 border-white flex text-center px-30 py-3 text-xl hover:bg-white hover:text-black font-bold">
-                    SHOP NOW
+                   <Link to={item.path}>SHOP NOW</Link> 
                   </div>
                 </div>
               </div>
