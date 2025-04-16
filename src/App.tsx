@@ -41,7 +41,7 @@ function App() {
   };
 
   const router = createRouter(display_cart, addToCart,toggleCart); // Pass addToCart here
-
+  console.log(productId)
   return (
     <>
       <NavBar toggleCart={toggleCart}  />
