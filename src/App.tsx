@@ -3,7 +3,6 @@ import { RouterProvider } from 'react-router-dom';
 import createRouter from '../src/pages/router';
 import './App.css';
 import { Cart } from './components/Cart';
-import { NavBar } from './components/NavBar';
 
 function App() {
   const [cartopen, setCartopen] = useState(false);
@@ -37,18 +36,21 @@ function App() {
   }, [cartItems]);
 
   const addToCart = (product: any) => {
-    setCartItems((prevItems:any) => [...prevItems, product]);
+    setCartItems((prevItems: any) => [...prevItems, product]);
   };
 
-  const router = createRouter(display_cart, addToCart,toggleCart); // Pass addToCart here
-  console.log(productId)
+  const router = createRouter(display_cart, addToCart, toggleCart);
+
   return (
     <>
-      <NavBar toggleCart={toggleCart}  />
-
       <RouterProvider router={router} />
 
-      <Cart isOpen={cartopen} toggleCart={toggleCart} cartItems={cartItems} setCartItems={setCartItems} />
+      <Cart
+        isOpen={cartopen}
+        toggleCart={toggleCart}
+        cartItems={cartItems}
+        setCartItems={setCartItems}
+      />
     </>
   );
 }

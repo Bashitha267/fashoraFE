@@ -1,5 +1,6 @@
 import { Heart, Menu, Search, ShoppingCart, User, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import './navbar.css';
 
 interface NavbarProps {
@@ -27,7 +28,7 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
         {/* Top Section */}
         <div className="flex justify-between items-center">
           <div className="logo_title text-3xl font-bold">
-            <a href='/'>FASHORA</a>
+            <Link to='/'>FASHORA</Link>
           </div>
 
           {/* Search Bar (hidden on small screens) */}
@@ -59,13 +60,13 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-2 bg-[#444444] justify-center">
           {menuLinks.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.path}
+              to={item.path}
               className="text-xl px-5 text-white font-bold hover:bg-white hover:text-black py-3"
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -73,14 +74,14 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
         {isMobileMenuOpen && (
           <div className="flex flex-col bg-[#444444] md:hidden">
             {menuLinks.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.path}
+               to={item.path}
                 className="text-lg text-white px-4 py-3 border-b border-gray-600 hover:bg-white hover:text-black"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
         )}
