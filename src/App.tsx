@@ -11,7 +11,7 @@ function App() {
   );
 
   const [productId, setProductID] = useState('');
-
+  console.log(productId)
   const display_cart = (_id: string) => {
     if (_id) {
       setProductID(_id);

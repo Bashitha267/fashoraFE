@@ -23,7 +23,7 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
   ];
 
   return (
-    <div className="bg-white fixed w-screen z-50 top-0 start-0 border-b border-gray-200 py-2">
+    <div className="bg-white fixed w-screen z-150 top-0 start-0 border-b border-gray-200 py-2">
       <div className="flex flex-col max-w-[170vh] mx-auto px-4 pt-2 gap-4">
         {/* Top Section */}
         <div className="flex justify-between items-center">
