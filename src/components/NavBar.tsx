@@ -1,6 +1,6 @@
 import { Heart, Menu, Search, ShoppingCart, User, X } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from '../assets/logo2.jpg';
 import './navbar.css';
 interface NavbarProps {
@@ -10,7 +10,7 @@ interface NavbarProps {
 export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const toggleMobileMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
-
+  const location = useLocation();
   const menuLinks = [
     { name: "Home", path: "/" },
     { name: "New", path: "/new" },
