@@ -12,13 +12,13 @@ export const SocialMedia = () => {
   ];
   return (
     <div className=" relative ">
-      <div className=" max-w-[160vh] mx-auto mt-5 grid md:grid-cols-6 grid-cols-2 gap-2 mb-10 px-4">
+      <div className=" max-w-[160vh] w-screen mx-auto mt-5 grid md:grid-cols-6 grid-cols-2  gap-0 md:gap-2 mb-10 md:px-4">
         {img.map((item) => (
-          <div>
+          <div className="">
             <img
               src={item}
               alt="social media"
-              className="md:h-[50vh]  md:object-cover h-[20vh] "
+              className="md:h-[50vh] object-fill md:object-cover h-[20vh] w-50 md:w-full"
             ></img>
           </div>
         ))}

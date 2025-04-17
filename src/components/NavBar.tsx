@@ -22,6 +22,7 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
     { name: "Beauty", path: "/beauty" },
     { name: "Brands", path: "/brands" },
     {name:"Accessories",path:"/accessories"},
+    {name:"My Orders",path:"/myorders"},
     
   ];
   

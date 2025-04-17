@@ -13,6 +13,8 @@ interface Product {
   price: number;
   main_image: string;
   additional_images: string[];
+  color: string;
+  sizes:any;
 }
 
 export const Women: React.FC<KidsProps> = ({ display_cart }) => {
@@ -20,12 +22,15 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
   const [loading, setLoading] = useState(false);
   const [loadingColors, setLoadingColors] = useState(false);
   const [colors, setColors] = useState<string[]>([]);
-
+  const [filteredProducts, setfilteredProducts] = useState(productData);
+  const [SizeDes, setSizeDes] = useState<string>("");
   useEffect(() => {
     const fetchColors = async () => {
       setLoadingColors(true);
       try {
-        const response = await axios.get('https://fashorabe26.onrender.com/getWomenColors');
+        const response = await axios.get(
+          "https://fashorabe26.onrender.com/getWomenColors"
+        );
         setColors(response.data);
       } catch (e) {
         console.error("Error fetching colors:", e);
@@ -40,7 +45,9 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('https://fashorabe26.onrender.com/getWomen');
+        const response = await axios.get(
+          "https://fashorabe26.onrender.com/getWomen"
+        );
         setProductData(response.data);
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -50,6 +57,20 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
     };
     fetchProducts();
   }, []);
+  useEffect(() => {
+    setfilteredProducts(productData);
+  }, [productData]);
+  const handleColor = (color: string) => {
+    const newProducts = productData.filter((item) => item.color === color);
+    setfilteredProducts(newProducts);
+  };
+  const handleSize = (size: string) => {
+    const newProducts = productData.filter((item) => item.sizes.includes(size));
+    setfilteredProducts(newProducts);
+  };
+
+
+
 
   if (loading || loadingColors) {
     return (
@@ -66,11 +87,15 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
         <div className="p-6 md:w-[40vh]">
           <div className="flex-col flex gap-5">
             <div className="section_name md:text-xl font-bold">SIZE</div>
-            <div className="flex gap-2 flex-wrap">
-              {["XS", "S", "M", "L"].map((size) => (
+            <div className="flex flex-row gap-2 ">
+              {["S", "M", "L"].map((size) => (
                 <button
                   key={size}
-                  className="border px-3 py-1 text-sm hover:bg-gray-200 transition"
+                  className={`border px-3 py-1 text-sm md:text-lg hover:bg-gray-200 transition ${SizeDes === size ? "bg-gray-300" : ""}`}
+                  onClick={()=>{
+                    handleSize(size)
+                    setSizeDes(size)
+                  }}
                 >
                   {size}
                 </button>
@@ -86,9 +111,12 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
               {colors.map((color, index) => (
                 <div
                   key={index}
-                  className="w-8 h-8 md:w-10 md:h-10 border-2 border-[#3F3F3D] cursor-pointer"
+                  className="w-5 h-5 md:w-10 md:h-10 border-2 border-[#3F3F3D] cursor-pointer"
                   style={{ backgroundColor: color }}
                   title={`Color ${index + 1}`}
+                  onClick={() => {
+                    handleColor(color);
+                  }}
                 />
               ))}
             </div>
@@ -98,36 +126,39 @@ export const Women: React.FC<KidsProps> = ({ display_cart }) => {
 
       {/* Products Grid */}
       <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
-        {productData.map((item) => (
+        {filteredProducts.map((item) => (
           <Link
             to={`/product/${item._id}`}
             key={item._id}
             className="flex flex-col gap-1 cursor-pointer"
             onClick={() => display_cart(item._id)}
           >
-            <div className="relative md:w-[40vh] md:h-[40vh] w-[18vh] h-[25vh] overflow-hidden group">
-              {/* Main Image */}
-              <img
-                src={item.main_image}
-                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out group-hover:opacity-0"
-                alt={item.name}
-                onError={(e) => {
-                  e.currentTarget.src = 'https://via.placeholder.com/400x400?text=Image+Not+Available';
-                }}
-              />
+           <div className="relative md:w-[40vh] md:h-[40vh] w-[18vh] h-[25vh] overflow-hidden group">
+  {/* Main Image */}
+  <img
+    src={item.main_image}
+    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${
+      item.additional_images.length > 0 && item.additional_images[0]?.trim() !== "" ? "group-hover:opacity-0" : ""
+    }`}
+    alt={item.name}
+    onError={(e) => {
+      e.currentTarget.src =
+        "https://via.placeholder.com/400x400?text=Image+Not+Available";
+    }}
+  />
 
-              {/* Hover Image */}
-              {item.additional_images?.[0] && (
-                <img
-                  src={item.additional_images[0]}
-                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100"
-                  alt={item.name}
-                  onError={(e) => {
-                    e.currentTarget.src = 'https://via.placeholder.com/400x400?text=Image+Not+Available';
-                  }}
-                />
-              )}
-            </div>
+  {/* Hover Image */}
+  {item.additional_images.length > 0 && item.additional_images[0]?.trim() !== "" && (
+    <img
+      src={item.additional_images[0]}
+      className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100"
+      alt={item.name}
+      onError={(e) => {
+        e.currentTarget.style.display = 'none';
+      }}
+    />
+  )}
+</div>
             <div className="flex justify-center font-semibold section_name text-lg text-[#2F2F2F]">
               {item.name}
             </div>
