@@ -38,7 +38,7 @@ export const Product: React.FC<KidsProps> = ({ addToCart, display_cart }) => {
   const [qty, setQty] = useState(1);
   const [emblaRef] = useEmblaCarousel({ loop: false, align: 'start' });
   const [cartFullModal, setCartFullModal] = useState(false);
-
+  console.log(display_cart)
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
