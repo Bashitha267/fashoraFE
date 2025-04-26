@@ -99,7 +99,7 @@ export const Product: React.FC<KidsProps> = ({ addToCart, display_cart }) => {
   const handleAddToCart = () => {
     const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
 
-    if (cartItems.length >= 4) {
+    if (cartItems.length >= 3) {
       setCartFullModal(true);
       return;
     }
@@ -168,7 +168,7 @@ export const Product: React.FC<KidsProps> = ({ addToCart, display_cart }) => {
               Cart Limit Reached
             </Dialog.Title>
             <div className="mt-2 text-sm text-gray-600">
-              You can only add up to 4 items to your cart. Please remove some items or proceed to checkout before adding more.
+              You can only add up to 3 items to your cart. Please remove some items or proceed to checkout before adding more.
             </div>
             <div className="mx-auto w-[30vh] gap-5  mt-4 flex justify-center">
               <button
