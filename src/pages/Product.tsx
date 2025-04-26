@@ -1,11 +1,13 @@
+import { Dialog, Transition } from '@headlessui/react';
 import axios from 'axios';
 import useEmblaCarousel from 'embla-carousel-react';
 import { Heart, ShoppingCartIcon, Star } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import { ThreeDot } from 'react-loading-indicators';
 import { Link, useParams } from 'react-router-dom';
+import { Footer } from '../components/Footer';
 
 interface KidsProps {
   display_cart: (id: string) => void;
@@ -26,36 +28,32 @@ interface Product {
   qty: number;
 }
 
-export const Product: React.FC<KidsProps> = ({
-  addToCart,
-  display_cart,
-}) => {
-  const { id } = useParams<{ id: string }>(); // Accessing 'id' from the URL
+export const Product: React.FC<KidsProps> = ({ addToCart, display_cart }) => {
+  const { id } = useParams<{ id: string }>();
   const [productData, setProductData] = useState<Product | null>(null);
   const [loading, setLoading] = useState(false);
   const [featured, setFeatured] = useState<Product[]>([]);
   const [category, setCategory] = useState<string>('');
   const [added, setAdded] = useState('ADD TO CART');
   const [qty, setQty] = useState(1);
-  const [emblaRef] = useEmblaCarousel({ loop: false });
-  console.log(display_cart)
+  const [emblaRef] = useEmblaCarousel({ loop: false, align: 'start' });
+  const [cartFullModal, setCartFullModal] = useState(false);
+
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(
-          `https://fashorabe26.onrender.com/getbyID/${id}` // Using 'id' here to fetch product
+        const res = await axios.get(
+          `https://fashorabe26.onrender.com/getbyID/${id}`
         );
-        if (response.data) {
-          setProductData(response.data);
-          setCategory(response.data.category);
+        if (res.data) {
+          setProductData(res.data);
+          setCategory(res.data.category);
           setAdded('ADD TO CART');
           setQty(1);
-        } else {
-          console.log('No product found.');
         }
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -65,45 +63,50 @@ export const Product: React.FC<KidsProps> = ({
   }, [id]);
 
   useEffect(() => {
-    const fetchFeaturedProducts = async () => {
+    const fetchFeatured = async () => {
       if (!category) return;
       setLoading(true);
       try {
-        const response = await axios.get(
+        const res = await axios.get(
           `https://fashorabe26.onrender.com/getbycategory/${category}`
         );
-        if (response.data) {
-          setFeatured(response.data);
+        if (res.data) {
+          setFeatured(res.data);
         }
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.error(err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchFeaturedProducts();
+    fetchFeatured();
   }, [category]);
 
-  const galleryImages =
-    productData?.additional_images && productData.main_image
-      ? [
-          {
-            original: productData.main_image,
-            thumbnail: productData.main_image,
-          },
-          ...productData.additional_images.map((img) => ({
-            original: img,
-            thumbnail: img,
-          })),
-        ]
-      : [];
+  const galleryImages = productData?.additional_images
+    ? [
+        {
+          original: productData.main_image,
+          thumbnail: productData.main_image,
+        },
+        ...productData.additional_images.map((img) => ({
+          original: img,
+          thumbnail: img,
+        })),
+      ]
+    : [];
 
   const handleAddToCart = () => {
-    if (added === 'ITEM ADDED') return;
+    const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+
+    if (cartItems.length >= 4) {
+      setCartFullModal(true);
+      return;
+    }
+
     if (productData) {
       const { _id, name, price, color, size, main_image } = productData;
-      const productToAdd = {
+      const newProduct = {
         id: _id,
         name,
         price,
@@ -112,152 +115,232 @@ export const Product: React.FC<KidsProps> = ({
         qty,
         image: main_image,
       };
-      addToCart(productToAdd);
+      addToCart(newProduct);
       setAdded('ITEM ADDED');
+      window.dispatchEvent(new Event('cartUpdated'));
     }
+  };
+
+  const closeCartFullModal = () => {
+    setCartFullModal(false);
   };
 
   if (loading) {
     return (
-      <div className="mt-20 w-screen md:max-w-[160vh] mx-auto max-w-[80%] flex justify-center items-center h-[80vh]">
+      <div className="flex items-center justify-center w-screen h-screen">
         <ThreeDot variant="pulsate" color="#FF6900" size="large" />
       </div>
     );
   }
 
   return (
-    <div className="md:mt-55 flex flex-col w-screen mt-40 max-w-[80%] mx-auto">
+    <div className="flex flex-col min-h-screen mt-20 md:mt-55">
+      {/* Cart Full Modal */}
+      <Transition appear show={cartFullModal} as={Fragment}>
+  <Dialog as="div" className="relative z-50" onClose={closeCartFullModal}>
+    <Transition.Child
+      as={Fragment}
+      enter="ease-out duration-300"
+      enterFrom="opacity-0"
+      enterTo="opacity-100"
+      leave="ease-in duration-200"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0"
+    >
+      {/* BACKGROUND */}
+      <div className="fixed inset-0 bg-black/20 backdrop-blur-md" />
+    </Transition.Child>
+
+    {/* MODAL */}
+    <div className="fixed inset-0 overflow-y-auto">
+      <div className="flex items-center justify-center min-h-full p-4">
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0 scale-95"
+          enterTo="opacity-100 scale-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-95"
+        >
+          <Dialog.Panel className="w-full max-w-md p-6 bg-white rounded-2xl shadow-xl">
+            <Dialog.Title className="text-lg font-bold text-gray-900">
+              Cart Limit Reached
+            </Dialog.Title>
+            <div className="mt-2 text-sm text-gray-600">
+              You can only add up to 4 items to your cart. Please remove some items or proceed to checkout before adding more.
+            </div>
+            <div className="mx-auto w-[30vh] gap-5  mt-4 flex justify-center">
+              <button
+                onClick={closeCartFullModal}
+                className="px-4 py-2 text-sm font-medium text-white bg-black rounded hover:bg-gray-800"
+              >
+                OK
+              </button>
+              <button
+                onClick={closeCartFullModal}
+                className="px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded hover:bg-orange-700"
+              >
+               <a href="/checkout">Checkout</a>
+              </button>
+            </div>
+          </Dialog.Panel>
+        </Transition.Child>
+      </div>
+    </div>
+  </Dialog>
+</Transition>
+
       {/* Main Product Section */}
-      <div className="flex md:p-3 md:mx-auto md:max-w-[150vh]">
-        <div className="md:flex md:flex-row md:gap-9 md:justify-evenly w-full">
+      <div className="container px-4 py-12 mx-auto max-w-7xl">
+        <div className="grid gap-8 lg:grid-cols-2">
           {/* Image Gallery */}
-          <div className="flex flex-col">
+          <div>
             {galleryImages.length > 0 ? (
-              <div className="md:max-w-[100vh]">
-                <ImageGallery
-                  items={galleryImages}
-                  showPlayButton={false}
-                  showNav={false}
-                  autoPlay={true}
-                  slideInterval={3000}
-                  renderItem={({ original }) => (
-                    <div className="flex justify-center">
-                      <img
-                        src={original}
-                        alt="Gallery"
-                        className="object-cover h-[60vh]"
-                      />
-                    </div>
-                  )}
-                />
-              </div>
+              <ImageGallery
+                items={galleryImages}
+                showPlayButton={false}
+                showNav={true}
+                showFullscreenButton={false}
+                slideInterval={3000}
+                renderItem={({ original }) => (
+                  <div className="flex items-center justify-center bg-gray-50">
+                    <img
+                      src={original}
+                      alt="Product"
+                      className="object-contain w-full h-[500px]"
+                      style={{ aspectRatio: '1/1' }}
+                    />
+                  </div>
+                )}
+                renderThumbInner={(item) => (
+                  <div className="flex items-center justify-center bg-gray-100">
+                    <img
+                      src={item.thumbnail}
+                      alt="Thumbnail"
+                      className="object-cover w-20 h-20"
+                    />
+                  </div>
+                )}
+              />
             ) : (
-              <p>No images available</p>
+              <div className="flex items-center justify-center h-[500px] bg-gray-100 rounded-lg">
+                No Images Available
+              </div>
             )}
           </div>
 
           {/* Product Info */}
-          <div className="flex flex-col md:w-[50%] items-start md:p-6 p-3">
-            <div className="font-mono md:text-4xl text-2xl text-gray-700 font-semibold mb-2">
-              {productData?.name}
-            </div>
+          <div className="flex flex-col p-6">
+            <h1 className="mb-4 text-3xl font-bold text-gray-900">{productData?.name}</h1>
 
-            <div className="md:flex md:flex-row md:gap-10 mb-2">
-              <div className="text-2xl items-center flex flex-row title_paragraph mb-3">
-                Color
-              </div>
+            <div className="flex items-center mb-6">
+              <div className="text-lg font-medium mr-2">Color:</div>
               <div
-                className="w-9 h-9 rounded-full border-4 border-gray-400"
+                className="w-8 h-8 rounded-full border"
                 style={{ backgroundColor: productData?.color }}
-              ></div>
+              />
             </div>
 
-            <div className="border-b-2 w-full border-black"></div>
+            <div className="my-6 border-t" />
 
-            <div className="text-2xl text-gray-600 font-bold item_prize my-4">
-              $ {productData?.price}
+            <div className="mb-6 text-2xl font-bold text-gray-900">
+              ${productData?.price.toFixed(2)}
             </div>
 
-            <div className="flex border-2 border-black w-fit mb-3">
-              <div
-                className="px-2 py-2 border-r-2 text-lg cursor-pointer"
-                onClick={() => qty > 1 && setQty(qty - 1)}
-              >
-                -
+            <div className="flex items-center mb-8">
+              <div className="text-lg font-medium mr-4">Quantity:</div>
+              <div className="flex items-center border rounded-md">
+                <button
+                  onClick={() => qty > 1 && setQty(qty - 1)}
+                  className="px-4 py-2 text-lg hover:bg-gray-100"
+                >
+                  -
+                </button>
+                <span className="px-4 py-2 text-lg">{qty}</span>
+                <button
+                  onClick={() => setQty(qty + 1)}
+                  className="px-4 py-2 text-lg hover:bg-gray-100"
+                >
+                  +
+                </button>
               </div>
-              <div className="px-6 py-2 border-r-2 text-lg">{qty}</div>
-              <div
-                className="px-2 py-2 text-lg cursor-pointer"
-                onClick={() => setQty(qty + 1)}
-              >
-                +
-              </div>
             </div>
 
-            <div className="flex md:flex-row w-full gap-4 mt-5 mb-5 flex-col">
+            <div className="flex flex-col gap-4 sm:flex-row mb-8">
               <button
                 onClick={handleAddToCart}
-                className={`py-2 px-4 text-xl md:px-12 md:text-2xl flex border-4 border-black text-center ${
+                className={`flex items-center justify-center px-8 py-3 font-medium text-lg text-white ${
                   added === 'ITEM ADDED'
-                    ? 'bg-orange-600 text-white rounded-xl border-white'
-                    : ''
-                }`}
+                    ? 'bg-green-600 hover:bg-green-700'
+                    : 'bg-black hover:bg-gray-800'
+                } rounded-md`}
               >
-                <ShoppingCartIcon size={28} className="mr-2" />
+                <ShoppingCartIcon size={20} className="mr-2" />
                 {added}
               </button>
 
-              <button className="py-2 px-4 text-xl md:px-12 md:text-2xl flex border-black hover:brightness-110 rounded-xl">
-                <Heart
-                  size={28}
-                  className="mr-2 transition duration-300 hover:fill-orange-500 hover:stroke-orange-500"
-                />
-                Add to Wishlist
+              <button className="flex items-center justify-center px-8 py-3 font-medium text-lg text-gray-900 border border-gray-300 rounded-md hover:bg-gray-50">
+                <Heart size={20} className="mr-2" />
+                Wishlist
               </button>
             </div>
 
-            <div className="border-b-2 w-full border-black"></div>
+            <div className="my-6 border-t" />
 
-            <div className="text-gray-450 item_desc md:text-lg flex items-center mt-5">
-              <Star size={15} className="mr-1" fill="gray" />
-              Made In {productData?.country}
-            </div>
-            <div className="text-gray-450 item_desc md:text-lg flex items-center">
-              <Star size={15} className="mr-1" fill="gray" />
-              Product ID: {productData?.id}
+            <div className="space-y-3 text-gray-600">
+              <div className="flex items-center">
+                <Star size={16} className="mr-2" />
+                Made in {productData?.country}
+              </div>
+              <div className="flex items-center">
+                <Star size={16} className="mr-2" />
+                Product ID: {productData?.id}
+              </div>
+              <div className="flex items-center">
+                <Star size={16} className="mr-2" />
+                Size: {productData?.size}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Featured Products Section */}
-      <div className="flex flex-col mt-10 max-w-[80%] mx-auto border-t-2 border-gray-500 pt-10 mb-20 p-4">
-        <div className="md:text-5xl pt-5 pb-10 item_name text-3xl text-center">
-          Featured Products
-        </div>
-        <div className="overflow-hidden max-w-[150vh]" ref={emblaRef}>
-          <div className="flex space-x-4">
-            {featured.map((product) => (
-              <div
-                key={product._id}
-                
-                className="min-w-[30vh] cursor-pointer"
-              ><Link to={`/product/${product._id}`}>
-                <img
-                  src={product.main_image}
-                  alt={product.name}
-                  className="object-cover w-[30vh] h-[30vh] rounded-lg"
-                />
-                <p className="text-center mt-2 text-lg">{product.name}</p>
-                <p className="text-center mt-2 text-2xl font-bold">
-                  $ {product.price}
-                </p>
-                </Link>
-              </div>
-            ))}
+      <div className="py-12 bg-gray-50">
+        <div className="container px-4 mx-auto max-w-7xl">
+          <h2 className="mb-10 text-3xl font-bold text-center text-gray-900">
+            You May Also Like
+          </h2>
+
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex gap-6">
+              {featured.map((product) => (
+                <div
+                  key={product._id}
+                  className="w-64 flex-none bg-white rounded-lg overflow-hidden shadow hover:shadow-lg"
+                >
+                  <Link to={`/product/${product._id}`} className="block">
+                    <div className="relative aspect-square bg-gray-100 overflow-hidden">
+                      <img
+                        src={product.main_image}
+                        alt={product.name}
+                        className="object-cover w-full h-full transition-transform hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="mb-1 text-lg font-medium truncate">{product.name}</h3>
+                      <p className="text-lg font-bold">${product.price.toFixed(2)}</p>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

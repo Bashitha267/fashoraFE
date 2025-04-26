@@ -3,29 +3,27 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 
-
-
-export const ShopSection= () => {
+export const ShopSection = () => {
   const ShopSectionList = [
     {
       name: 'Men',
       image: 'https://res.cloudinary.com/dnfbik3if/image/upload/v1743228794/men4_mf9bha.jpg',
-      path:'/men',
+      path: '/men',
     },
     {
       name: 'Women',
       image: 'https://res.cloudinary.com/dnfbik3if/image/upload/v1743228799/women_jpbuve.png',
-      path:'/women',
+      path: '/women',
     },
     {
       name: 'Kids',
       image: 'https://res.cloudinary.com/dnfbik3if/image/upload/v1743228790/kid_wfcvei.jpg',
-      path:'/kids',
+      path: '/kids',
     },
     {
       name: 'Footwear',
       image: 'https://res.cloudinary.com/dnfbik3if/image/upload/v1743231855/shoe2_fgtkd2.jpg',
-      path:'shoes',
+      path: 'shoes',
     },
   ];
 
@@ -45,26 +43,17 @@ export const ShopSection= () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5 pb-10 mx-auto px-4 md:px-0">
         {ShopSectionList.map((item, index) => {
           const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
-          const [show, setShow] = useState(false);
+          const [show, setShow] = useState(index === 0); // show immediately if first
 
-          // Staggered animation delay
           useEffect(() => {
-            if (inView) {
-              const timer = setTimeout(() => setShow(true), index * 200); // 2s delay per index
+            if (inView && index !== 0) {
+              const timer = setTimeout(() => setShow(true), index * 200);
               return () => clearTimeout(timer);
             }
           }, [inView, index]);
 
-          return (
-            <motion.div
-              key={item.name}
-              ref={ref}
-              className="relative flex flex-col items-center justify-center cursor-pointer"
-              
-              initial={{ x: index % 2 === 0 ? -200 : 200, opacity: 0 }}
-              animate={show ? { x: 0, opacity: 1 } : {}}
-              transition={{ duration: 0.8 }}
-            >
+          const content = (
+            <div className="relative flex flex-col items-center justify-center cursor-pointer">
               <div className="relative overflow-hidden">
                 <img
                   src={item.image}
@@ -73,10 +62,26 @@ export const ShopSection= () => {
                 />
                 <div className="w-[50vh] absolute bottom-6 left-1/2 transform -translate-x-1/2 items-center text-center flex flex-col">
                   <div className="backdrop-blur-md text-white border-4 border-white flex text-center px-30 py-3 text-xl hover:bg-white hover:text-black font-bold">
-                   <Link to={item.path}>SHOP NOW</Link> 
+                    <Link to={item.path}>SHOP NOW</Link>
                   </div>
                 </div>
               </div>
+            </div>
+          );
+
+          return index === 0 ? (
+            <div key={item.name} ref={ref}>
+              {content}
+            </div>
+          ) : (
+            <motion.div
+              key={item.name}
+              ref={ref}
+              initial={{ x: index % 2 === 0 ? -200 : 200, opacity: 0 }}
+              animate={show ? { x: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.8 }}
+            >
+              {content}
             </motion.div>
           );
         })}

@@ -30,6 +30,8 @@ export const Cart: React.FC<CartProps> = ({ isOpen, toggleCart, cartItems, setCa
 
   const removeItem = (id: number) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    window.dispatchEvent(new Event('cartUpdated'));
+
   };
 
   const updateQty = (id: number, newQty: number) => {

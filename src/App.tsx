@@ -20,6 +20,7 @@ function App() {
 
   const toggleCart = () => {
     setCartopen(!cartopen);
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
   const initialCart = () => {
@@ -29,14 +30,17 @@ function App() {
 
   useEffect(() => {
     setCartItems(initialCart());
+    window.dispatchEvent(new Event('cartUpdated'));
   }, []);
 
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    window.dispatchEvent(new Event('cartUpdated'));
   }, [cartItems]);
 
   const addToCart = (product: any) => {
     setCartItems((prevItems: any) => [...prevItems, product]);
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
   const router = createRouter(display_cart, addToCart, toggleCart);

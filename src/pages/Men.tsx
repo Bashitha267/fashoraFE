@@ -1,23 +1,25 @@
 import axios from "axios";
+import { Grid } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ThreeDot } from "react-loading-indicators";
 import { Link } from "react-router-dom";
+import { Footer } from "../components/Footer";
 
 interface KidsProps {
-  display_cart: any; // You can specify the actual type of display_cart if possible
+  display_cart: (id: string) => void;
 }
+
 interface Product {
   _id: string;
   name: string;
   price: number;
-  main_image:any;
-  additional_images:string;
-  color:string;
-  sizes:any
-  // other properties
+  main_image: string;
+  additional_images: string[];
+  color: string;
+  sizes:any;
 }
-export const Men:React.FC<KidsProps>= ({display_cart}) => {
-  // 
+
+export const Men: React.FC<KidsProps> = ({ display_cart }) => {
   const [productData, setProductData] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [loadingColors, setLoadingColors] = useState(false);
@@ -29,7 +31,7 @@ export const Men:React.FC<KidsProps>= ({display_cart}) => {
       setLoadingColors(true);
       try {
         const response = await axios.get(
-          "https://fashorabe26.onrender.com/getMenColors"
+          "https://fashorabe26.onrender.com/getmenColors"
         );
         setColors(response.data);
       } catch (e) {
@@ -46,7 +48,7 @@ export const Men:React.FC<KidsProps>= ({display_cart}) => {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://fashorabe26.onrender.com/getMen"
+          "https://fashorabe26.onrender.com/getmen"
         );
         setProductData(response.data);
       } catch (err) {
@@ -61,12 +63,22 @@ export const Men:React.FC<KidsProps>= ({display_cart}) => {
     setfilteredProducts(productData);
   }, [productData]);
   const handleColor = (color: string) => {
-    const newProducts = productData.filter((item) => item.color === color);
+    if(color==="ALL"){
+      setfilteredProducts(productData);
+    }
+    else{const newProducts = productData.filter((item) => item.color === color);
     setfilteredProducts(newProducts);
-  };
+  };}
   const handleSize = (size: string) => {
-    const newProducts = productData.filter((item) => item.sizes.includes(size));
-    setfilteredProducts(newProducts);
+    if (size==="ALL"){
+      setfilteredProducts(productData);
+    }
+    else{
+      const newProducts = productData.filter((item) => item.sizes.includes(size));
+      setfilteredProducts(newProducts);
+
+    }
+    
   };
 
 
@@ -87,11 +99,11 @@ export const Men:React.FC<KidsProps>= ({display_cart}) => {
         <div className="p-6 md:w-[40vh]">
           <div className="flex-col flex gap-5">
             <div className="section_name md:text-xl font-bold">SIZE</div>
-            <div className="flex flex-row gap-2 ">
-              {["S", "M", "L"].map((size) => (
+            <div className="md:flex md:flex-row grid grid-cols-2 gap-2  ">
+              {["S", "M", "L","ALL"].map((size) => (
                 <button
                   key={size}
-                  className={`border px-3 py-1 text-sm md:text-lg hover:bg-gray-200 transition ${SizeDes === size ? "bg-gray-300" : ""}`}
+                  className={`border px-1 md:px-3 py-1 text-sm md:text-lg hover:bg-gray-200 transition ${SizeDes === size ? "bg-gray-300" : ""}`}
                   onClick={()=>{
                     handleSize(size)
                     setSizeDes(size)
@@ -107,11 +119,11 @@ export const Men:React.FC<KidsProps>= ({display_cart}) => {
         <div className="p-6">
           <div className="flex-col flex gap-5">
             <div className="section_name md:text-xl font-bold">COLOR</div>
-            <div className="md:flex md:flex-row grid grid-cols-5 md:gap-4 gap-2">
+            <div className="md:flex md:flex-row grid grid-cols-4 md:gap-4 gap-2">
               {colors.map((color, index) => (
                 <div
                   key={index}
-                  className="w-5 h-5 md:w-10 md:h-10 border-2 border-[#3F3F3D] cursor-pointer"
+                  className="w-7 h-7 md:w-10 md:h-10 border-2 border-[#3F3F3D] cursor-pointer"
                   style={{ backgroundColor: color }}
                   title={`Color ${index + 1}`}
                   onClick={() => {
@@ -119,13 +131,16 @@ export const Men:React.FC<KidsProps>= ({display_cart}) => {
                   }}
                 />
               ))}
+              <div onClick={() => {
+                    handleColor("ALL");
+                  }}><Grid className="w-7 h-7 md:w-10 md:h-10" ></Grid></div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Products Grid */}
-      <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
+      <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
         {filteredProducts.map((item) => (
           <Link
             to={`/product/${item._id}`}
@@ -133,7 +148,7 @@ export const Men:React.FC<KidsProps>= ({display_cart}) => {
             className="flex flex-col gap-1 cursor-pointer"
             onClick={() => display_cart(item._id)}
           >
-           <div className="relative md:w-[40vh] md:h-[40vh] w-[18vh] h-[25vh] overflow-hidden group">
+           <div className="relative md:w-[35vh] md:h-[50vh] w-[18vh] h-[25vh] overflow-hidden group">
   {/* Main Image */}
   <img
     src={item.main_image}
@@ -159,15 +174,19 @@ export const Men:React.FC<KidsProps>= ({display_cart}) => {
     />
   )}
 </div>
-            <div className="flex justify-center font-semibold section_name text-lg text-[#2F2F2F]">
+            <div className="flex justify-center font-semibold section_name md:text-xl text-md text-[#2F2F2F]">
               {item.name}
             </div>
-            <div className="flex justify-center section_name font-bold text-xl text-[#222222]">
+            <div className="flex justify-center section_name font-bold text-xl md:text-2xl md:mt-3 text-[#222222]">
               ${item.price}
             </div>
+            <div className="flex justify-center items-center mt-2 text-sm text-gray-600">
+ 
+</div>
           </Link>
         ))}
       </div>
+      <Footer/>
     </div>
   );
-}
+};
