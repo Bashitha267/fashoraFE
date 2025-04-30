@@ -12,11 +12,7 @@ export const Cart: React.FC<CartProps> = ({ isOpen, toggleCart, cartItems, setCa
   
 
 
-  const clearCart = () => {
-    localStorage.removeItem('cartItems');
-    setCartItems([]);
-  };
-
+ 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
@@ -156,9 +152,9 @@ export const Cart: React.FC<CartProps> = ({ isOpen, toggleCart, cartItems, setCa
 
                   <div
                     className="flex flex-row bg-gradient-to-r from-red-500 via-orange-500 to-pink-500 p-2 justify-center text-white rounded-3xl"
-                    onClick={clearCart} // Correctly call clearCart function here
+                     // Correctly call clearCart function here
                   >
-                    <button>Checkout</button>
+                    <a href="/checkout">Checkout</a><button ></button>
                   </div>
 
                   <div className="flex flex-row justify-center text-gray-500 ">

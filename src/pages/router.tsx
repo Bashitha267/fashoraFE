@@ -11,6 +11,7 @@ import { Women } from '../pages/Women';
 import { Accessories } from './Accessories';
 import { Beauty } from './Beauty';
 import { Brands } from './Brands';
+import { Checkout } from './Checkout';
 import { Myorders } from './Myorders';
 import { New } from './New';
 import { Sale } from './Sale';
@@ -46,6 +47,7 @@ const createRouter = (
         {path:'accessories',element:<Accessories/>},
         {path:'brands',element:<Brands/>},
         {path:'myorders',element:<Myorders/>},
+        {path:"checkout/",element:<Checkout/>},
       ]
     }
   ]);
