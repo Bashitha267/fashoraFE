@@ -13,24 +13,29 @@ interface Product {
 export const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
   const [expandOrderSummary, setExpandOrderSummary] = useState(false);
-  const [products, setProducts] = useState<Product[]>([]);
 
-  // 2. Load products from localStorage
+  // Use localStorage directly for default state of products
+  const storedCartItems = localStorage.getItem("cartItems");
+  const initialProducts: Product[] = storedCartItems ? JSON.parse(storedCartItems) : [];
+
+  const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [isLoading, setIsLoading] = useState(true);
+  console.log(isLoading)
+
+  // 2. Handle cart items update
   useEffect(() => {
-    const stored = localStorage.getItem("cartItems");
-    if (stored) {
-      setProducts(JSON.parse(stored));
-    }
-  }, []);
+    setIsLoading(false); // Once loading is complete
+  }, [products]);
 
   // 3. Remove item from cart
   const removeItem = (index: number) => {
     const updated = [...products];
     updated.splice(index, 1);
     setProducts(updated);
-    window.dispatchEvent(new Event('cartUpdated'));
 
+    // Update localStorage immediately after modifying the state
     localStorage.setItem("cartItems", JSON.stringify(updated));
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
   // 4. Calculate totals
@@ -118,8 +123,6 @@ export const Checkout = () => {
 
         {/* Right Column - Order Summary */}
         <div className={`order-summary ${expandOrderSummary ? "expanded" : ""}`}>
-          
-
           <div className="order-items">
             {products.length > 0 ? (
               products.map((item, index) => (
@@ -132,9 +135,7 @@ export const Checkout = () => {
                   </div>
                   <button
                     className="remove-btn"
-                    onClick={() => removeItem(index)
-                      
-                    }
+                    onClick={() => removeItem(index)}
                     style={{
                       marginLeft: "auto",
                       background: "transparent",
@@ -142,9 +143,8 @@ export const Checkout = () => {
                       color: "red",
                       cursor: "pointer"
                     }}
-                   
                   >
-                    <Trash2 size={25} color="gray"></Trash2> 
+                    <Trash2 size={25} color="gray" />
                   </button>
                 </div>
               ))
