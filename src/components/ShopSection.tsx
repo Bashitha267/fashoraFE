@@ -61,7 +61,7 @@ export const ShopSection = () => {
                   className="object-cover w-[60vh] h-[70vh] duration-500"
                 />
                 <div className="w-[50vh] absolute bottom-6 left-1/2 transform -translate-x-1/2 items-center text-center flex flex-col">
-                  <div className="backdrop-blur-md text-white border-4 border-white flex text-center px-30 py-3 text-xl hover:bg-white hover:text-black font-bold">
+                  <div className="backdrop-blur-md text-white border-4 border-white flex text-center lg:px-30 lg:py-3 px-20 py-2 text-md lg:text-lg hover:bg-white hover:text-black font-bold">
                     <Link to={item.path}>SHOP NOW</Link>
                   </div>
                 </div>
