@@ -114,7 +114,7 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
             <Link
               key={item.name}
               to={item.path}
-              className={`text-xl px-5 font-bold hover:bg-white hover:text-black py-3 ${
+              className={`text-lg px-4 font-bold py-2  hover:bg-white hover:text-black  ${
                 location.pathname === item.path ? "bg-white text-black" : "text-white"
               }`}
             >
