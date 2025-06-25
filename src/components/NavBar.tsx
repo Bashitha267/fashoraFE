@@ -24,7 +24,7 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
     { name: "Kids", path: "/kids" },
     { name: "Shoes", path: "/shoes" },
     { name: "Beauty", path: "/beauty" },
-    { name: "Brands", path: "/brands" },
+   
     { name: "Accessories", path: "/accessories" },
     { name: "My Orders", path: "/myorders" },
   ];
@@ -53,7 +53,7 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
 
   return (
     <div className="bg-white fixed w-screen z-50 top-0 start-0 border-b border-gray-200 py-2">
-      <div className="flex flex-col max-w-[170vh] mx-auto px-4 pt-2 gap-4">
+      <div className="flex flex-col w-5/6 mx-auto px-4 pt-2 gap-4">
         {/* Top Section */}
         <div className="flex justify-between items-center">
           <div className="logo_title text-3xl font-bold">
@@ -109,12 +109,12 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-2 bg-[#444444] justify-center">
+        <div className="hidden lg:flex gap-2 bg-[#444444] justify-center">
           {menuLinks.map((item) => (
             <Link
               key={item.name}
               to={item.path}
-              className={`text-lg px-4 font-bold py-2  hover:bg-white hover:text-black  ${
+              className={`text-lg lg:px-4 md:py-0 md:px-2 font-bold lg:py-2  hover:bg-white hover:text-black  ${
                 location.pathname === item.path ? "bg-white text-black" : "text-white"
               }`}
             >
@@ -125,7 +125,7 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="flex flex-col bg-[#444444] md:hidden">
+          <div className="flex flex-col bg-[#444444] lg::hidden">
             {menuLinks.map((item) => (
               <Link
                 key={item.name}
