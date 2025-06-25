@@ -35,15 +35,15 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
   };
 
   useEffect(() => {
-    // Initial cart count load
+    
     updateCartCount();
 
-    // Custom event handler
+   
     const handleCartUpdate = () => {
       updateCartCount();
     };
 
-    // Listen for cart updates
+   
     window.addEventListener('cartUpdated', handleCartUpdate);
 
     return () => {
@@ -61,14 +61,24 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
           </div>
 
           {/* Search Bar */}
-          <div className="hidden md:flex flex-row bg-[#F2F2F2] p-3 rounded-4xl w-[70vh] justify-between">
-            <input
-              type="text"
-              placeholder="Search products"
-              className="w-full focus:outline-none text-xl bg-transparent pl-4"
-            />
-            <Search size={30} color="#1E1E1E" />
-          </div>
+        <div className="hidden md:flex flex-row bg-[#F2F2F2] p-3 rounded-4xl w-[70vh] py-2 focus:border-none focus:ring-0 focus:outline-none shadow-none">
+  <div className="flex-row flex mx-auto mt-2">
+    <div className="w-[40vh] border-0 outline-none ring-0 focus:ring-0 focus:outline-none focus:border-0 shadow-none">
+      <input
+        type="search"
+        style={{
+          border:"",
+         
+        }}
+        placeholder="Search products"
+        className="w-full mt-1 text-xl pl-4 bg-transparent border-0 outline-none ring-0 focus:ring-0 focus:outline-none focus:border-0 shadow-none placeholder:text-gray-500"
+      />
+    </div>
+    <div className="mx-5 mt-2">
+      <Search size={35} color="#1E1E1E" />
+    </div>
+  </div>
+  </div>
 
           {/* Icons */}
           <div className="flex flex-row gap-4 items-center">
@@ -79,7 +89,7 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
                 onClick={toggleCart} 
                 className="cursor-pointer" 
               />
-              {cartItemsCount > 0 && ( // Only show badge if cart has items
+              {cartItemsCount > 0 && ( 
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                   {cartItemsCount}
                 </span>

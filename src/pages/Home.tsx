@@ -1,6 +1,7 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import { Arrivals } from "../components/Arrivals";
 import { BrandC } from "../components/BrandC";
 import { Footer } from "../components/Footer";
 import '../components/home.css';
@@ -11,7 +12,7 @@ import { ShopSection } from "../components/ShopSection";
 import { SocialMedia } from "../components/SocialMedia";
 
 
-// Animation like @keyframes appear
+
 const scrollVariant = {
   hidden: {
     opacity: 0,
@@ -56,7 +57,8 @@ export const Home= () => {
     <div className="w-screen  mt-10 mx-auto">
       {/* Hometitle - No animation */}
       <Hometitle />
-
+        <NewArrivals/>
+        <Arrivals/>
       {/* Animated sections */}
       <RevealOnScroll>
         <ShopSection/>
@@ -70,9 +72,7 @@ export const Home= () => {
         <SocialMedia />
       </RevealOnScroll>
       <BrandC/>
-      <RevealOnScroll>
-        <NewArrivals/>
-      </RevealOnScroll>
+    
       <Footer/>
     </div>
   );

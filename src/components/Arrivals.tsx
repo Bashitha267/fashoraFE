@@ -1,4 +1,3 @@
-import { Heart, ShoppingCart } from "lucide-react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -13,7 +12,7 @@ export const Arrivals = () => {
     },
     {
       id: 2,
-      name: "white croptop ",
+      name: "White croptop ",
       prize: 11,
       img: "https://res.cloudinary.com/dnfbik3if/image/upload/v1741280577/Screenshot_128_nqynnb.png",
       desc: "This is a black sweater",
@@ -74,12 +73,7 @@ export const Arrivals = () => {
                 alt={item.name} 
               />
               </div>
-              <div className="absolute top-2 right-2 opacity-100 md:opacity-0  translate-y-4 md:translate-y-8  -translate-x-5   md:-translate-x-9 group-hover:opacity-100 transition-opacity duration-300 p-3 bg-orange-400  hover:bg-orange-600 rounded-full md:block hidden">
-                <ShoppingCart size={28} color="white" />
-              </div>
-              <div className="absolute top-2 left-2 opacity-100 md:opacity-0 md:translate-x-9 md:translate-y-8 translate-y-4 translate-x-3 md:group-hover:opacity-100 transition-opacity duration-300 p-3 bg-orange-400  hover:bg-orange-600 rounded-full md:block hidden">
-                <Heart size={28} color="white" />
-              </div>
+            
             </div>
             <div className="item_name text-[2rem] font-bold tracking-wide md:pl-0 pl-2">
               {item.name}
@@ -87,7 +81,7 @@ export const Arrivals = () => {
             <div className="item_desc text-[1rem] font-light text-gray-600 leading-6 pl-2 md:p-0">
               {item.desc}
             </div>
-            <div className="item_prize text-[1.5rem] font-semibold text-orange-500 pl-2 md:p-0">
+            <div className="item_prize text-[1.5rem] font-semibold text-black-500 pl-2 md:p-0">
               ${item.prize}
             </div>
           </div>
