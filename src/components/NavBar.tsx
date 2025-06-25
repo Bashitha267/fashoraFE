@@ -56,12 +56,12 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
       <div className="flex flex-col w-5/6 mx-auto px-4 pt-2 gap-4">
         {/* Top Section */}
         <div className="flex justify-between items-center">
-          <div className="logo_title text-3xl font-bold">
-            <Link to="/"><img src={logo} className="md:w-65 w-40 md:h-30 h-25 object-contain" alt="Logo" /></Link>
+          <div className="">
+            <Link to="/"><img src={logo} className="lg:w-65 w-35 lg:h-30 h-25 object-contain" alt="Logo" /></Link>
           </div>
 
           {/* Search Bar */}
-        <div className="hidden md:flex flex-row bg-[#F2F2F2] p-3 rounded-4xl w-[70vh] py-2 focus:border-none focus:ring-0 focus:outline-none shadow-none">
+        <div className="hidden md:flex flex-row bg-[#F2F2F2]   rounded-4xl w-[70vh]   focus:border-none focus:ring-0 focus:outline-none shadow-none">
   <div className="flex-row flex mx-auto mt-2">
     <div className="w-[40vh] border-0 outline-none ring-0 focus:ring-0 focus:outline-none focus:border-0 shadow-none">
       <input
@@ -82,7 +82,7 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
 
           {/* Icons */}
           <div className="flex flex-row gap-4 items-center">
-            <User size={26} className="cursor-pointer" />
+           <Link to={'/login'}> <User size={26} className="cursor-pointer" /></Link>
             <div className="relative">
               <ShoppingCart 
                 size={26} 
@@ -95,7 +95,7 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
                 </span>
               )}
             </div>
-            <Heart size={26} className="cursor-pointer" />
+           <Link to={'/fav'}><Heart size={26} className="cursor-pointer" /></Link> 
 
             {/* Mobile Menu Toggle */}
             <div className="md:hidden">

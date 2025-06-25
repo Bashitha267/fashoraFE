@@ -2,7 +2,6 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Arrivals } from "../components/Arrivals";
-import { BrandC } from "../components/BrandC";
 import { Footer } from "../components/Footer";
 import '../components/home.css';
 import { Hometitle } from "../components/Hometitle";
@@ -71,7 +70,7 @@ export const Home= () => {
       <RevealOnScroll>
         <SocialMedia />
       </RevealOnScroll>
-      <BrandC/>
+    
     
       <Footer/>
     </div>
