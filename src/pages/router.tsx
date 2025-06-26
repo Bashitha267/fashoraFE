@@ -9,13 +9,14 @@ import { Kids } from '../pages/Kids';
 import { Men } from '../pages/Men';
 import { Other } from '../pages/Other';
 import { Product } from '../pages/Product';
-import { Signup } from '../pages/Signup';
 import { Women } from '../pages/Women';
 import { Accessories } from './Accessories';
 import { Beauty } from './Beauty';
 import { Myorders } from './Myorders';
 import { New } from './New';
 import { Sale } from './Sale';
+import { Signin } from './Signin';
+import { Signup } from './Signup';
 
 const Layout = ({ toggleCart }: { toggleCart: () => void }) => {
   const [isCartOpen, setIsCartOpen] = useState(false); // State for cart visibility
@@ -47,7 +48,8 @@ const createRouter = (
         { path: 'shoes', element: <Other display_cart={display_cart} /> },
         { path: 'product/:id', element: <Product display_cart={display_cart} addToCart={addToCart} /> },
         { path: 'fav', element: <Favourite /> },
-        { path: 'login', element: <Signup /> },
+        { path: 'login', element: <Signin/>},
+        {path:'sign-up',element:<Signup/>},
         { path: 'new', element: <New /> },
         { path: 'beauty', element: <Beauty /> },
         { path: 'sale', element: <Sale /> },
