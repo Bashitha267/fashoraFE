@@ -53,7 +53,7 @@ const RevealOnScroll: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
 export const Home= () => {
   return (
-    <div className="w-screen  mt-10 mx-auto">
+    <div className="w-screen  mt-2 mx-auto">
       {/* Hometitle - No animation */}
       <Hometitle />
         <NewArrivals/>
