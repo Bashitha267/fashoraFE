@@ -1,54 +1,35 @@
-# React + TypeScript + Vite
+# 🛍️ Fashora - Fashion E-commerce Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Fashora is a dynamic and modern e-commerce platform that offers a wide variety of stylish clothing and accessories for women, men, and kids. With a vibrant orange-themed design, Fashora ensures a seamless and responsive shopping experience across all devices.
 
-Currently, two official plugins are available:
+![Fashora Banner](https://res.cloudinary.com/dnfbik3if/image/upload/v1744824070/Screenshot_2025-04-16_224749_mlw35p.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🌟 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🧥 Fashion collections for **women**, **men**, **kids** and many
+- ⚡ Built with **React**, **Node.js**, and **Tailwind CSS**
+- 📱 Fully **responsive** and optimized for mobile
+- 🔎 Product filtering, sorting, and search functionality
+- 🛒 Shopping cart and checkout system with sync with local storage
+- 🔐 User authentication and secure payment integration
+- 🎨 Clean, vibrant **Light black-themed UI**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Frontend:** React, Tailwind CSS
+- **Backend:** Node.js, Express
+- **Database:** MongoDB 
+- **Authentication:** JWT, bcrypt
+- **Deployment:** Vercel / Netlify (frontend), Render  (backend)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## 🚀 Getting Started
+
+1. **Clone the repo:**
+   ```bash
+   git clone https://github.com/Bashitha267/fashora.git
