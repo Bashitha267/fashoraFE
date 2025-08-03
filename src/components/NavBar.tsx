@@ -56,9 +56,9 @@ export const NavBar: React.FC<NavbarProps> = ({ toggleCart }) => {
             <input
               type="search"
               placeholder="Search products"
-              className="flex-1 text-base bg-transparent border-none outline-none placeholder:text-gray-500"
+              className="flex-1 text-base bg-transparent border-none outline-none placeholder:text-gray-500 mt-2"
             />
-            <Search size={22} color="#1E1E1E" className="ml-2" />
+            <Search size={22} color="#1E1E1E" className="ml-2 mt-2" />
           </div>
 
           {/* Icons */}
