@@ -25,8 +25,7 @@ export const Signin = () => {
           
           </div>
         </div>
-        <div className="col-span-1 bg-[#444444]"></div>
-        <div className="absolute hidden  lg:flex bottom-0 left-1/2 right-0.5 bg-red-200 " >img</div>
+  
 
       </div>
 
